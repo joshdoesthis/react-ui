@@ -1,9 +1,12 @@
 {
-  "name": "@joshdoesthis/react-twind-ui",
+  "name": "@joshdoesthis/react-ui",
   "version": "1.0.0",
   "description": "A simple UI library for React apps with Twind",
   "main": "index.js",
-  "repository": "https://github.com/joshdoesthis/react-ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshdoesthis/react-ui.git"
+  },
   "author": "Joshua Wilson",
   "license": "MIT",
   "dependencies": {
