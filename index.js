@@ -20,7 +20,17 @@ install(
     },
     rules: [
       [/^fa-/],
-      [/-fa$/],
+      [
+        /-fa$/,
+        {
+          'width': '1em',
+          'height': '1em',
+          'boxSizing': 'content-box',
+          'verticalAlign': '-0.125em',
+          'overflow': 'visible',
+          '&:not(:root)': { overflow: 'hidden' }
+        }
+      ],
       ['safe-top', { paddingTop: 'env(safe-area-inset-top)' }],
       ['safe-right', { paddingRight: 'env(safe-area-inset-right)' }],
       ['safe-bottom', { paddingBottom: 'env(safe-area-inset-bottom)' }],
