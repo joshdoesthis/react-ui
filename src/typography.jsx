@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+import React, { createElement } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export const Typography = ({ children, varient = 'span', tw = '' }) => {
