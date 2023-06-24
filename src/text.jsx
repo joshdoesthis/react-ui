@@ -1,7 +1,7 @@
 import React, { createElement } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export const Typography = ({ children, varient = 'span', tw = '' }) => {
+export const Text = ({ children, varient = 'span', tw = '' }) => {
   const styles = {
     base: `mt-2 mb-2`,
     varient: {
@@ -11,6 +11,8 @@ export const Typography = ({ children, varient = 'span', tw = '' }) => {
       h4: `text-xl font-bold`,
       h5: `text-lg font-bold`,
       h6: `text-base font-bold`,
+      ol: `list-decimal list-inside`,
+      ul: `list-disc list-inside`,
       p: `text-base`,
       span: `
         text-base

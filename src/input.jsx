@@ -38,6 +38,27 @@ export const Input = ({
     }
   }
 
+  if (type === 'textarea') {
+    return (
+      <textarea
+        id={id}
+        className={twMerge(`
+          ${style.base}
+          ${style.size[size]}
+          ${tw}
+          flex-grow
+          border-0
+          p-0
+          resize-none
+        `)}
+        onChange={change}
+        onBlur={blur}
+        value={value}
+        data-error={error}
+      />
+    )
+  }
+
   return (
     <input
       id={id}
