@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 
 export const Button = ({
   children,
-  varient = 'default',
+  variant = 'default',
   size = 'base',
   click = () => {},
   disabled = false,
@@ -33,7 +33,7 @@ export const Button = ({
         h-12
       `
     },
-    varient: {
+    variant: {
       primary: `
         bg-indigo-500 dark:bg-indigo-400
         text-zinc-100 dark:text-zinc-100
@@ -75,7 +75,7 @@ export const Button = ({
       className={twMerge(`
         ${style.base}
         ${style.size[size]}
-        ${style.varient[varient]}
+        ${style.variant[variant]}
         ${disabled ? style.disabled : ''}
         ${tw}
       `)}

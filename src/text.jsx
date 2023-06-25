@@ -1,7 +1,7 @@
 import React, { createElement } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export const Text = ({ children, tw = '', varient = 'span' }) => {
+export const Text = ({ children, tw = '', variant = 'span' }) => {
   const style = {
     h1: `block my-4 text-4xl font-bold`,
     h2: `block my-4 text-3xl font-bold`,
@@ -16,8 +16,8 @@ export const Text = ({ children, tw = '', varient = 'span' }) => {
   }
 
   return createElement(
-    varient,
-    { className: twMerge(`${style[varient]} ${tw}`) },
+    variant,
+    { className: twMerge(`${style[variant]} ${tw}`) },
     children
   )
 }

@@ -8,7 +8,7 @@ export const Input = ({
   id = '',
   size = 'base',
   tw = '',
-  varient = 'text',
+  variant = 'text',
   value = ''
 }) => {
   const ref = useRef(null)
@@ -46,7 +46,7 @@ export const Input = ({
     }
   }
 
-  if (varient === 'multiline') {
+  if (variant === 'multiline') {
     return (
       <div
         className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
@@ -68,7 +68,7 @@ export const Input = ({
       id={id}
       onBlur={blur}
       onChange={change}
-      type={varient}
+      type={variant}
       value={value}
     />
   )
