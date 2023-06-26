@@ -79,7 +79,7 @@ const App = () => {
       <Box>
         <Text variant='h1'>React UI</Text>
         <Box tw='flex-col gap-2'>
-          <Input type='text' change={change} />
+          <Input varient='text' change={change} />
           <Button click={click}>Click Me</Button>
         </Box>
       </Box>
