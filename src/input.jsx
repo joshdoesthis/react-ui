@@ -15,10 +15,17 @@ export const Input = ({
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.focus()
       ref.current.innerText = value
     }
   }, [ref])
+
+  useEffect(() => {
+    if (ref.current) {
+      if (ref.current.innerText !== value) {
+        ref.current.innerText = value
+      }
+    }
+  }, [value])
 
   const style = {
     base: `
