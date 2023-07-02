@@ -6,6 +6,7 @@ export const Input = ({
   change = () => {},
   error = '',
   id = '',
+  name = '',
   size = 'base',
   tw = '',
   variant = 'text',
@@ -73,6 +74,7 @@ export const Input = ({
       className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
       data-error={error}
       id={id}
+      name={name}
       onBlur={blur}
       onChange={change}
       type={variant}
