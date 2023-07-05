@@ -1,79 +1,81 @@
 import React, { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Box } from './box.jsx'
+import { getDaysInMonth } from 'date-fns'
 import { Input } from './input.jsx'
-import { Text } from './text.jsx'
+import { Box } from './box.jsx'
 
-export const Time = ({ change = () => {}, blur = () => {}, tw = '' }) => {
+export const Time = ({
+  change = () => {},
+  blur = () => {},
+  tw = {
+    box: '',
+    input: ''
+  }
+}) => {
   const [state, set_state] = useState({
-    day: new Date().getDate().toString().padStart(2, '0'),
-    month: new Date().getMonth().toString().padStart(2, '0'),
-    year: new Date().getFullYear().toString().padStart(4, '0'),
-    hour: new Date().getHours().toString(),
-    minute: new Date().getMinutes().toString(),
-    second: new Date().getSeconds().toString()
+    day: { ok: true, data: new Date().getDate() },
+    month: { ok: true, data: new Date().getMonth() },
+    year: { ok: true, data: new Date().getFullYear() }
   })
 
   useEffect(() => {
+    const ok = state.day.ok && state.month.ok && state.year.ok
+    const message =
+      state.day.message || state.month.message || state.year.message
+        ? 'Invalid date'
+        : null
     const date = new Date(
-      state.year,
-      state.month,
-      state.day,
-      state.hour,
-      state.minute,
-      state.second
+      state.year.data,
+      state.month.data - 1,
+      state.day.data
     ).toISOString()
-    change(date)
+    change({ ok, message, date: ok ? date : null })
   }, [state])
 
-  const change_time = e => {
-    set_state({
+  const set = e => {
+    const { name, value } = e.target
+    set_state(state => ({
       ...state,
-      [e.target.name]: e.target.value
-    })
+      [name]: {
+        ...state[name],
+        data: value
+      }
+    }))
+  }
+
+  const validate = () => {
+    for (const [name, { data }] of Object.entries(state)) {
+      const max_d = getDaysInMonth(
+        new Date(state.year.data, state.month.data - 1)
+      )
+      const min_y = new Date().getFullYear()
+      const max_y = min_y + 100
+      const [ok, message] = {
+        day: data < 1 || data > max_d ? [false, 'Invalid day'] : null,
+        month: data < 1 || data > 12 ? [false, 'Invalid month'] : null,
+        year: data < min_y || data > max_y ? [false, 'Invalid year'] : null
+      }[name] ?? [true, null]
+      state[name] = { data, ok, message }
+    }
+    set_state({ ...state })
   }
 
   return (
-    <Box tw='max-w-sm gap-1'>
-      <Box tw='flex-col gap-1'>
-        <Text tw='text-sm'>Day</Text>
-        <Input name='day' change={change_time} value={state.day} size='sm' />
-      </Box>
-      <Box tw='flex-col gap-1'>
-        <Text tw='text-sm'>Month</Text>
+    <Box tw={twMerge('gap-1', tw.box)}>
+      {Object.entries(state).map(([name, { ok, message, data }]) => (
         <Input
-          name='month'
-          change={change_time}
-          value={state.month}
+          key={name}
+          name={name}
+          change={set}
+          blur={validate}
+          value={data}
+          ok={!ok}
+          message={message}
+          variant='number'
           size='sm'
+          tw={twMerge('w-24', tw.input)}
         />
-      </Box>
-      <Box tw='flex-col gap-1'>
-        <Text tw='text-sm'>Year</Text>
-        <Input name='year' change={change_time} value={state.year} size='sm' />
-      </Box>
-      <Box tw='flex-col gap-1'>
-        <Text tw='text-sm'>Hour</Text>
-        <Input name='hour' change={change_time} value={state.hour} size='sm' />
-      </Box>
-      <Box tw='flex-col gap-1'>
-        <Text tw='text-sm'>Minute</Text>
-        <Input
-          name='minute'
-          change={change_time}
-          value={state.minute}
-          size='sm'
-        />
-      </Box>
-      <Box tw='flex-col gap-1'>
-        <Text tw='text-sm'>Second</Text>
-        <Input
-          name='second'
-          change={change_time}
-          value={state.second}
-          size='sm'
-        />
-      </Box>
+      ))}
     </Box>
   )
 }

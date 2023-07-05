@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 export const Input = ({
   blur = () => {},
   change = () => {},
-  error = '',
+  ok = '',
   id = '',
   name = '',
   size = 'base',
@@ -32,7 +32,7 @@ export const Input = ({
     base: `
       bg-zinc-100 dark:bg-zinc-800
       border-1 border-zinc-300 dark:border-zinc-600
-      data-[error=true]:border-red-500 dark:data-[error=true]:border-red-500
+      data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
       outline-none
       rounded
       text-zinc-800 dark:text-zinc-100
@@ -54,12 +54,14 @@ export const Input = ({
     }
   }
 
+  // TODO: Add support for data-message
+
   if (variant === 'multiline') {
     return (
       <div
         className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
         contentEditable
-        data-error={error}
+        data-ok={ok}
         id={id}
         onBlur={blur}
         onInput={change}
@@ -72,7 +74,7 @@ export const Input = ({
   return (
     <input
       className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
-      data-error={error}
+      data-ok={ok}
       id={id}
       name={name}
       onBlur={blur}
