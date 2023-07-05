@@ -17,6 +17,11 @@ export const Button = ({
       select-none
     `,
     size: {
+      xs: `
+        text-xs
+        px-1 py-0.5
+        h-6
+      `,
       sm: `
         text-sm
         px-2 py-1
