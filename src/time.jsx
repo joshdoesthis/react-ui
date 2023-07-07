@@ -4,7 +4,7 @@ import { getDaysInMonth } from 'date-fns'
 import { Input } from './input'
 import { Box } from './box'
 import { Text } from './text'
-import { to_title_case, to_first_upper } from '../lib/helpers'
+import { to_first_upper } from '../lib/helpers'
 
 export const Time = ({
   change = () => {},
@@ -32,7 +32,7 @@ export const Time = ({
       state.month.data - 1,
       state.day.data
     ).toISOString()
-    change({ ok, message, date: ok ? date : null })
+    change({ ok, message, data: { value: ok ? date : null } })
   }, [state])
 
   const set = e => {

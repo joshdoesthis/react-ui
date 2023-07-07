@@ -27,14 +27,16 @@ const DefaultOptionComponent = ({
 export const Select = ({
   change = () => {},
   options,
+  defaultValue,
   label = '',
   OptionComponent = DefaultOptionComponent,
   tw = ''
 }) => {
   const [open, set_open] = useState(false)
-  const [selected, set_selected] = useState(null)
+  const [selected, set_selected] = useState(
+    options.find(o => o.value === defaultValue)
+  )
   const toggle = () => set_open(open => !open)
-
   const ref = useRef(null)
 
   useEffect(() => {
@@ -47,9 +49,12 @@ export const Select = ({
     return () => document.removeEventListener('click', close)
   }, [])
 
+  useEffect(() => {
+    change({ ok: true, message: null, data: { value: selected.value } })
+  }, [selected])
+
   const select = ({ name, value }) => {
     set_selected({ name, value })
-    change({ name, value })
     set_open(false)
   }
 
