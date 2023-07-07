@@ -3,10 +3,13 @@ import { twMerge } from 'tailwind-merge'
 import { getDaysInMonth } from 'date-fns'
 import { Input } from './input'
 import { Box } from './box'
+import { Text } from './text'
+import { to_title_case, to_first_upper } from '../lib/helpers'
 
 export const Time = ({
   change = () => {},
   blur = () => {},
+  label = '',
   tw = {
     box: '',
     input: ''
@@ -61,21 +64,26 @@ export const Time = ({
   }
 
   return (
-    <Box tw={twMerge('gap-1', tw.box)}>
-      {Object.entries(state).map(([name, { ok, message, data }]) => (
-        <Input
-          key={name}
-          name={name}
-          change={set}
-          blur={validate}
-          value={data}
-          ok={!ok}
-          message={message}
-          variant='number'
-          size='sm'
-          tw={twMerge('w-24', tw.input)}
-        />
-      ))}
+    <Box tw='flex-col gap-1'>
+      <Text variant='label' size='sm'>
+        {to_first_upper(label)}
+      </Text>
+      <Box tw={twMerge('gap-1', tw.box)}>
+        {Object.entries(state).map(([name, { ok, message, data }]) => (
+          <Input
+            key={name}
+            name={name}
+            change={set}
+            blur={validate}
+            value={data}
+            ok={!ok}
+            message={message}
+            variant='number'
+            size='sm'
+            tw={twMerge('w-24', tw.input)}
+          />
+        ))}
+      </Box>
     </Box>
   )
 }

@@ -2,11 +2,24 @@ import React, { useState, useEffect, useRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Box } from './box'
 import { Button } from './button'
+import { Text } from './text'
+import { to_title_case, to_first_upper } from '../lib/helpers'
 
-const DefaultOptionComponent = ({ change, name, value, tw = '' }) => {
+const DefaultOptionComponent = ({
+  select,
+  selected = false,
+  name,
+  value,
+  tw = ''
+}) => {
   return (
-    <Button click={() => change({ name, value })} size='sm'>
-      {name}
+    <Button
+      click={() => select({ name, value })}
+      size='sm'
+      selected={selected}
+      tw={tw}
+    >
+      {to_title_case(name)}
     </Button>
   )
 }
@@ -19,6 +32,7 @@ export const Select = ({
   tw = ''
 }) => {
   const [open, set_open] = useState(false)
+  const [selected, set_selected] = useState(null)
   const toggle = () => set_open(open => !open)
 
   const ref = useRef(null)
@@ -33,28 +47,66 @@ export const Select = ({
     return () => document.removeEventListener('click', close)
   }, [])
 
+  const select = ({ name, value }) => {
+    set_selected({ name, value })
+    change({ name, value })
+    set_open(false)
+  }
+
   const style = {
+    base: `
+      bg-zinc-100 dark:bg-zinc-800
+      border-1 border-zinc-300 dark:border-zinc-600
+      data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
+      outline-none
+      rounded
+      text-zinc-800 dark:text-zinc-100
+      w-full
+    `,
     options: `
       flex-col
+      absolute z-10 top-full left-0 right-0
       bg-zinc-100 dark:bg-zinc-800
       ${open ? 'opacity-100' : 'opacity-0'}
-      ${open ? 'h-auto' : 'max-h-0'}
+      ${open ? 'visible' : 'hidden'}
+      bg-zinc-100 dark:bg-zinc-800
+      border-1 border-zinc-300 dark:border-zinc-600
+      data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
+      outline-none
+      rounded
+      text-zinc-800 dark:text-zinc-100
+      w-full
+      overflow-hidden
+      mt-0.5
+    `,
+    option: `
+      hover:bg-zinc-200 dark:hover:bg-zinc-700
+      active:bg-zinc-300 dark:active:bg-zinc-600
+      disabled:bg-zinc-400 dark:disabled:bg-zinc-500
+      data-[selected=true]:bg-zinc-300 dark:data-[selected=true]:bg-zinc-600
+      rounded-none
     `
   }
 
   return (
-    <Box forwardRef={ref} tw='relative'>
-      <Box tw='flex-col absolute'>
-        <Button click={toggle} size='sm'>
-          {label} <span tw='text-xs'>&#9660;</span>
+    <Box tw='flex-col gap-1'>
+      <Text variant='label' size='sm'>
+        {to_first_upper(label)}
+      </Text>
+      <Box forwardRef={ref} tw='relative'>
+        <Button click={toggle} size='sm' tw={twMerge(style.base)}>
+          <Text size='sm'>{selected && to_title_case(selected.name)}</Text>
+          <Text size='sm'>&#9662;</Text>
         </Button>
         <Box tw={style.options}>
           {options.map((option, i) => (
             <OptionComponent
               key={`option_${i}`}
-              change={change}
+              select={select}
               value={option.value}
               name={option.name}
+              selected={selected ? selected.value === option.value : false}
+              tw={style.option}
             />
           ))}
         </Box>

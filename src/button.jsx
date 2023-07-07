@@ -6,8 +6,9 @@ export const Button = ({
   children,
   forwardRef = null,
   variant = 'default',
-  size = 'base',
+  size = 'md',
   disabled = false,
+  selected = false,
   tw = ''
 }) => {
   const style = {
@@ -28,7 +29,7 @@ export const Button = ({
         px-2 py-1
         h-8
       `,
-      base: `
+      md: `
         text-base
         px-4 py-2
         h-10
@@ -88,6 +89,7 @@ export const Button = ({
       `)}
       onClick={click}
       disabled={disabled}
+      data-selected={selected}
     >
       {children}
     </button>
