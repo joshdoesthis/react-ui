@@ -1,5 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { Box } from './box'
+import { Text } from './text'
+import { to_first_upper } from '../lib/helpers'
 
 export const Input = ({
   blur = () => {},
@@ -7,6 +10,7 @@ export const Input = ({
   ok = '',
   id = '',
   name = '',
+  label = '',
   size = 'base',
   tw = '',
   variant = 'text',
@@ -54,7 +58,7 @@ export const Input = ({
     }
   }
 
-  // TODO: Add support for data-message
+  // TODO: Add support for data-message?
 
   if (variant === 'multiline') {
     return (
@@ -72,15 +76,22 @@ export const Input = ({
   }
 
   return (
-    <input
-      className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
-      data-ok={ok}
-      id={id}
-      name={name}
-      onBlur={blur}
-      onChange={change}
-      type={variant}
-      value={value}
-    />
+    <Box tw='flex-col gap-1 w-64'>
+      {label ? (
+        <Text variant='label' size='sm'>
+          {to_first_upper(label)}
+        </Text>
+      ) : null}
+      <input
+        className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
+        data-ok={ok}
+        id={id}
+        name={name}
+        onBlur={blur}
+        onChange={change}
+        type={variant}
+        value={value}
+      />
+    </Box>
   )
 }

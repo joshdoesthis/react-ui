@@ -53,6 +53,10 @@ export const Select = ({
     change({ ok: true, message: null, data: { value: selected.value } })
   }, [selected])
 
+  useEffect(() => {
+    set_selected(options.find(o => o.value === defaultValue))
+  }, [defaultValue])
+
   const select = ({ name, value }) => {
     set_selected({ name, value })
     set_open(false)
@@ -63,9 +67,9 @@ export const Select = ({
       bg-zinc-100 dark:bg-zinc-800
       border-1 border-zinc-300 dark:border-zinc-600
       data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
+      text-zinc-800 dark:text-zinc-100
       outline-none
       rounded
-      text-zinc-800 dark:text-zinc-100
       w-full
     `,
     options: `
@@ -80,7 +84,6 @@ export const Select = ({
       outline-none
       rounded
       text-zinc-800 dark:text-zinc-100
-      w-full
       overflow-hidden
       mt-0.5
     `,
@@ -94,10 +97,12 @@ export const Select = ({
   }
 
   return (
-    <Box tw='flex-col gap-1 w-48'>
-      <Text variant='label' size='sm'>
-        {to_first_upper(label)}
-      </Text>
+    <Box tw='flex-col gap-1 w-64'>
+      {label ? (
+        <Text variant='label' size='sm'>
+          {to_first_upper(label)}
+        </Text>
+      ) : null}
       <Box forwardRef={ref} tw='relative'>
         <Button click={toggle} size='sm' tw={twMerge(style.base)}>
           <Text size='sm'>{selected && to_title_case(selected.name)}</Text>

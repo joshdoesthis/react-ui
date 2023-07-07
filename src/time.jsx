@@ -17,7 +17,7 @@ export const Time = ({
 }) => {
   const [state, set_state] = useState({
     day: { ok: true, data: new Date().getDate() },
-    month: { ok: true, data: new Date().getMonth() },
+    month: { ok: true, data: new Date().getMonth() + 1 },
     year: { ok: true, data: new Date().getFullYear() }
   })
 
@@ -65,9 +65,11 @@ export const Time = ({
 
   return (
     <Box tw='flex-col gap-1'>
-      <Text variant='label' size='sm'>
-        {to_first_upper(label)}
-      </Text>
+      {label ? (
+        <Text variant='label' size='sm'>
+          {to_first_upper(label)}
+        </Text>
+      ) : null}
       <Box tw={twMerge('gap-1', tw.box)}>
         {Object.entries(state).map(([name, { ok, message, data }]) => (
           <Input
