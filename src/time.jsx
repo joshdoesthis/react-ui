@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { getDaysInMonth } from 'date-fns'
-import { Input } from './input.jsx'
-import { Box } from './box.jsx'
+import { Input } from './input'
+import { Box } from './box'
 
 export const Time = ({
   change = () => {},

@@ -2,16 +2,17 @@ import React from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export const Button = ({
+  click = () => {},
   children,
+  forwardRef = null,
   variant = 'default',
   size = 'base',
-  click = () => {},
   disabled = false,
   tw = ''
 }) => {
   const style = {
     base: `
-      flex flex-row gap-2 items-center justify-center
+      flex flex-row gap-2 items-center justify-between
       rounded
       cursor-pointer
       select-none
@@ -77,6 +78,7 @@ export const Button = ({
 
   return (
     <button
+      ref={forwardRef}
       className={twMerge(`
         ${style.base}
         ${style.size[size]}
