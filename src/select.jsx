@@ -94,7 +94,7 @@ export const Select = ({
   }
 
   return (
-    <Box tw='flex-col gap-1'>
+    <Box tw='flex-col gap-1 w-48'>
       <Text variant='label' size='sm'>
         {to_first_upper(label)}
       </Text>
