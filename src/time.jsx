@@ -64,7 +64,7 @@ export const Time = ({
   }
 
   return (
-    <Box tw='flex-col gap-1'>
+    <>
       {label ? (
         <Text variant='label' size='sm'>
           {to_first_upper(label)}
@@ -86,6 +86,6 @@ export const Time = ({
           />
         ))}
       </Box>
-    </Box>
+    </>
   )
 }

@@ -76,7 +76,7 @@ export const Input = ({
   }
 
   return (
-    <Box tw='flex-col gap-1 w-64'>
+    <>
       {label ? (
         <Text variant='label' size='sm'>
           {to_first_upper(label)}
@@ -92,6 +92,6 @@ export const Input = ({
         type={variant}
         value={value}
       />
-    </Box>
+    </>
   )
 }

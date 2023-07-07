@@ -13,10 +13,11 @@ export const Button = ({
 }) => {
   const style = {
     base: `
-      flex flex-row gap-2 items-center justify-between
+      border-1 border-transparent
+      flex flex-row gap-2 items-center justify-between self-center
       rounded
       cursor-pointer
-      select-none
+      select-none      
     `,
     size: {
       xs: `

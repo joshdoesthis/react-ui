@@ -10,12 +10,13 @@ const DefaultOptionComponent = ({
   selected = false,
   name,
   value,
+  size,
   tw = ''
 }) => {
   return (
     <Button
       click={() => select({ name, value })}
-      size='sm'
+      size={size}
       selected={selected}
       tw={tw}
     >
@@ -30,6 +31,7 @@ export const Select = ({
   defaultValue,
   label = '',
   OptionComponent = DefaultOptionComponent,
+  size = 'sm',
   tw = ''
 }) => {
   const [open, set_open] = useState(false)
@@ -50,14 +52,11 @@ export const Select = ({
   }, [])
 
   useEffect(() => {
-    change({ ok: true, message: null, data: { value: selected.value } })
-  }, [selected])
-
-  useEffect(() => {
     set_selected(options.find(o => o.value === defaultValue))
   }, [defaultValue])
 
   const select = ({ name, value }) => {
+    change({ ok: true, message: null, data: { value } })
     set_selected({ name, value })
     set_open(false)
   }
@@ -93,20 +92,21 @@ export const Select = ({
       disabled:bg-zinc-400 dark:disabled:bg-zinc-500
       data-[selected=true]:bg-zinc-300 dark:data-[selected=true]:bg-zinc-600
       rounded-none
+      self-stretch
     `
   }
 
   return (
-    <Box tw='flex-col gap-1 w-64'>
+    <>
       {label ? (
-        <Text variant='label' size='sm'>
+        <Text variant='label' size={size}>
           {to_first_upper(label)}
         </Text>
       ) : null}
       <Box forwardRef={ref} tw='relative'>
-        <Button click={toggle} size='sm' tw={twMerge(style.base)}>
-          <Text size='sm'>{selected && to_title_case(selected.name)}</Text>
-          <Text size='sm'>&#9662;</Text>
+        <Button click={toggle} size={size} tw={twMerge(style.base)}>
+          <Text size={size}>{selected && to_title_case(selected.name)}</Text>
+          <Text size={size}>&#9662;</Text>
         </Button>
         <Box tw={style.options}>
           {options.map((option, i) => (
@@ -115,12 +115,13 @@ export const Select = ({
               select={select}
               value={option.value}
               name={option.name}
+              size={size}
               selected={selected ? selected.value === option.value : false}
               tw={style.option}
             />
           ))}
         </Box>
       </Box>
-    </Box>
+    </>
   )
 }
