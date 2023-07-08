@@ -14,8 +14,14 @@ const DefaultSwitchComponent = ({ isDarkMode, click }) => {
 
 export const DarkMode = ({ SwitchComponent = DefaultSwitchComponent }) => {
   const [dark_mode, set_dark_mode] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches
+    JSON.parse(localStorage.getItem('dark_mode')) ??
+      window.matchMedia('(prefers-color-scheme: dark)').matches
   )
+
+  const change_mode = mode => {
+    localStorage.setItem('dark_mode', mode)
+    set_dark_mode(mode)
+  }
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -28,7 +34,7 @@ export const DarkMode = ({ SwitchComponent = DefaultSwitchComponent }) => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handle_change = e => set_dark_mode(e.matches)
+    const handle_change = e => change_mode(e.matches)
     mediaQuery.addEventListener('change', handle_change)
     return () => mediaQuery.removeEventListener('change', handle_change)
   }, [])
@@ -36,7 +42,7 @@ export const DarkMode = ({ SwitchComponent = DefaultSwitchComponent }) => {
   return SwitchComponent ? (
     <SwitchComponent
       isDarkMode={dark_mode}
-      toggleDarkMode={() => set_dark_mode(!dark_mode)}
+      toggleDarkMode={() => change_mode(!dark_mode)}
     />
   ) : null
 }

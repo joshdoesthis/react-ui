@@ -42,7 +42,6 @@ install(
 export * from './src/box'
 export * from './src/button'
 export * from './src/dark-mode'
-export * from './src/data-table'
 export * from './src/drawer'
 export * from './src/input'
 export * from './src/select'
