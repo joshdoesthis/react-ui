@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Box } from './box'
 import { Text } from './text'
 import { to_first_upper } from '../lib/helpers'
 
