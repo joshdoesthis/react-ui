@@ -66,24 +66,18 @@ export const Select = ({
       bg-zinc-100 dark:bg-zinc-800
       border-1 border-zinc-300 dark:border-zinc-600
       data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
-      text-zinc-800 dark:text-zinc-100
-      outline-none
-      rounded
-      w-full
+      rounded 
     `,
     options: `
       flex-col
       absolute z-10 top-full left-0 right-0
-      bg-zinc-100 dark:bg-zinc-800
       ${open ? 'opacity-100' : 'opacity-0'}
       ${open ? 'visible' : 'hidden'}
       bg-zinc-100 dark:bg-zinc-800
       border-1 border-zinc-300 dark:border-zinc-600
       data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
-      outline-none
-      rounded
-      text-zinc-800 dark:text-zinc-100
       overflow-hidden
+      rounded
       mt-0.5
     `,
     option: `

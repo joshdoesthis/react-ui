@@ -14,10 +14,10 @@ export const Button = ({
   const style = {
     base: `
       border-1 border-transparent
-      flex flex-row gap-2 items-center justify-between self-center
+      flex flex-row gap-2 items-center justify-between
       rounded
       cursor-pointer
-      select-none      
+      select-none 
     `,
     size: {
       xs: `
@@ -47,6 +47,7 @@ export const Button = ({
         disabled:bg-zinc-400 dark:disabled:bg-zinc-500
       `,
       secondary: `
+        border-1 border-zinc-300 dark:border-zinc-600
         bg-zinc-100 dark:bg-zinc-800
         text-zinc-800 dark:text-zinc-100
         font-bold
