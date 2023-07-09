@@ -1,3 +1,4 @@
+import React from 'react'
 import { createElement } from 'react'
 
 export const Text = ({ children }) => {
