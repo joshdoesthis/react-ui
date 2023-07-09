@@ -1,6 +1,6 @@
 {
   "name": "@joshdoesthis/react-ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A simple UI library for React apps",
   "main": "index.js",
   "repository": {
