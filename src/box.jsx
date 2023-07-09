@@ -1,21 +1,6 @@
-import React from 'react'
-import { twMerge } from 'tailwind-merge'
-
-export const Box = ({ children, forwardRef = null, tw = '' }) => {
-  const style = {
-    base: `
-      flex
-    `
-  }
-
+export const Box = ({ children, forwardRef = null, visible = true }) => {
   return (
-    <div
-      ref={forwardRef}
-      className={twMerge(`
-        ${style.base}
-        ${tw}
-      `)}
-    >
+    <div ref={forwardRef} data-visible={visible}>
       {children}
     </div>
   )

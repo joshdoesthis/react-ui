@@ -1,117 +1,66 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { useState, useEffect, useRef } from 'react'
 import { Box } from './box'
 import { Button } from './button'
 import { Text } from './text'
-import { to_title_case, to_first_upper } from '../lib/helpers'
+import { toTitleCase, toFirstUpper } from '../lib/helpers'
 
-const DefaultOptionComponent = ({
-  select,
-  selected = false,
-  name,
-  value,
-  size,
-  tw = ''
-}) => {
+const DefaultOptionComponent = ({ name, value, active = false, select }) => {
   return (
-    <Button
-      click={() => select({ name, value })}
-      size={size}
-      selected={selected}
-      tw={tw}
-    >
-      {to_title_case(name)}
+    <Button press={() => select({ name, value })} active={active}>
+      {toTitleCase(name)}
     </Button>
   )
 }
 
 export const Select = ({
-  change = () => {},
-  options,
-  defaultValue,
   label = '',
+  defaultValue,
+  options,
   OptionComponent = DefaultOptionComponent,
-  size = 'sm',
-  tw = ''
+  change = () => {}
 }) => {
-  const [open, set_open] = useState(false)
-  const [selected, set_selected] = useState(
+  const [visible, setVisible] = useState(false)
+  const [selected, setSelected] = useState(
     options.find(o => o.value === defaultValue)
   )
-  const toggle = () => set_open(open => !open)
   const ref = useRef(null)
+  const toggle = () => setVisible(!visible)
 
   useEffect(() => {
-    const close = e => {
+    const click = e => {
       if (ref.current && !ref.current.contains(e.target)) {
-        set_open(false)
+        setVisible(false)
       }
     }
-    document.addEventListener('click', close)
-    return () => document.removeEventListener('click', close)
+    document.addEventListener('click', click)
+    return () => document.removeEventListener('click', click)
   }, [])
 
   useEffect(() => {
-    set_selected(options.find(o => o.value === defaultValue))
+    setSelected(options.find(o => o.value === defaultValue))
   }, [defaultValue])
 
   const select = ({ name, value }) => {
-    change({ ok: true, message: null, data: { value } })
-    set_selected({ name, value })
-    set_open(false)
-  }
-
-  const style = {
-    base: `
-      bg-zinc-100 dark:bg-zinc-800
-      border-1 border-zinc-300 dark:border-zinc-600
-      data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
-      rounded 
-    `,
-    options: `
-      flex-col
-      absolute z-10 top-full left-0 right-0
-      ${open ? 'opacity-100' : 'opacity-0'}
-      ${open ? 'visible' : 'hidden'}
-      bg-zinc-100 dark:bg-zinc-800
-      border-1 border-zinc-300 dark:border-zinc-600
-      data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
-      overflow-hidden
-      rounded
-      mt-0.5
-    `,
-    option: `
-      hover:bg-zinc-200 dark:hover:bg-zinc-700
-      active:bg-zinc-300 dark:active:bg-zinc-600
-      disabled:bg-zinc-400 dark:disabled:bg-zinc-500
-      data-[selected=true]:bg-zinc-300 dark:data-[selected=true]:bg-zinc-600
-      rounded-none
-      self-stretch
-    `
+    change({ ok: true, message: '', data: { value } })
+    setSelected({ name, value })
+    setVisible(false)
   }
 
   return (
     <>
-      {label ? (
-        <Text variant='label' size={size}>
-          {to_first_upper(label)}
-        </Text>
-      ) : null}
-      <Box forwardRef={ref} tw='relative'>
-        <Button click={toggle} size={size} tw={twMerge(style.base)}>
-          <Text size={size}>{selected && to_title_case(selected.name)}</Text>
-          <Text size={size}>&#9662;</Text>
+      {label ? <Text>{toFirstUpper(label)}</Text> : null}
+      <Box forwardRef={ref}>
+        <Button press={toggle}>
+          <Text>{selected && toTitleCase(selected.name)}</Text>
         </Button>
-        <Box tw={style.options}>
-          {options.map((option, i) => (
+        <Box>
+          {options.map((o, i) => (
             <OptionComponent
-              key={`option_${i}`}
+              key={`o${i}`}
+              name={o.name}
+              value={o.value}
+              active={selected ? selected.value === o.value : false}
               select={select}
-              value={option.value}
-              name={option.name}
-              size={size}
-              selected={selected ? selected.value === option.value : false}
-              tw={style.option}
             />
           ))}
         </Box>

@@ -1,96 +1,96 @@
-import React, { useRef, useEffect } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { useRef, useEffect, useState } from 'react'
+import { Box } from './box'
 import { Text } from './text'
-import { to_first_upper } from '../lib/helpers'
+import { toFirstUpper } from '../lib/helpers'
 
 export const Input = ({
-  blur = () => {},
-  change = () => {},
-  ok = '',
   id = '',
-  name = '',
   label = '',
-  size = 'base',
-  tw = '',
-  variant = 'text',
-  value = ''
+  name = '',
+  type = 'text',
+  defaultValue = '',
+  ok = true,
+  message = '',
+  change = () => {},
+  blur = () => {}
 }) => {
+  const [value, setValue] = useState(defaultValue)
   const ref = useRef(null)
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.innerText = value
+      ref.current.innerText = defaultValue
     }
   }, [ref])
 
   useEffect(() => {
     if (ref.current) {
-      if (ref.current.innerText !== value) {
-        ref.current.innerText = value
+      if (ref.current.innerText !== defaultValue) {
+        ref.current.innerText = defaultValue
       }
+    }
+  }, [defaultValue])
+
+  useEffect(() => {
+    if (type === 'multiline') {
+      change({ ok: true, message: '', data: { value } })
+    } else {
+      change({ ...validate(type, value), data: { value } })
     }
   }, [value])
 
-  const style = {
-    base: `
-      bg-zinc-100 dark:bg-zinc-800
-      border-1 border-zinc-300 dark:border-zinc-600
-      data-[ok=true]:border-red-500 dark:data-[ok=true]:border-red-500
-      outline-none
-      rounded
-      text-zinc-800 dark:text-zinc-100
-      w-full
-    `,
-    size: {
-      sm: `
-        px-2 py-1
-        text-sm
-      `,
-      base: `
-        px-4 py-2
-        text-base
-      `,
-      lg: `
-        px-6 py-3
-        text-lg
-      `
+  const set = type => e => {
+    if (type === 'multiline') {
+      setValue(e.target.innerText)
+    } else {
+      setValue(e.target.value)
     }
   }
 
-  // TODO: Add support for data-message?
+  const validate = (type, value) => {
+    if (type === 'text') {
+      return value.length > 0
+        ? { ok: true, message: '' }
+        : { ok: false, message: 'Required' }
+    }
+    if (type === 'email') {
+      return value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+        ? { ok: true, message: '' }
+        : { ok: false, message: 'Invalid email address' }
+    }
+  }
 
-  if (variant === 'multiline') {
+  if (type === 'multiline') {
     return (
-      <div
-        className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
-        contentEditable
-        data-ok={ok}
-        id={id}
-        onBlur={blur}
-        onInput={change}
-        ref={ref}
-        suppressContentEditableWarning
-      />
+      <Box>
+        {label ? <Text>{toFirstUpper(label)}</Text> : null}
+        {message ? <Text>{message}</Text> : null}
+        <div
+          ref={ref}
+          id={id}
+          contentEditable
+          suppressContentEditableWarning
+          data-ok={ok}
+          onBlur={blur}
+          onInput={set(type)}
+        />
+      </Box>
     )
   }
 
   return (
-    <>
-      {label ? (
-        <Text variant='label' size='sm'>
-          {to_first_upper(label)}
-        </Text>
-      ) : null}
+    <Box>
+      {label ? <Text>{toFirstUpper(label)}</Text> : null}
+      {message ? <Text>{message}</Text> : null}
       <input
-        className={twMerge(`${style.base} ${style.size[size]} ${tw}`)}
-        data-ok={ok}
         id={id}
+        type={type}
         name={name}
-        onBlur={blur}
-        onChange={change}
-        type={variant}
         value={value}
+        data-ok={ok}
+        onBlur={blur}
+        onChange={set(type)}
       />
-    </>
+    </Box>
   )
 }
