@@ -14,6 +14,14 @@ Using [yarn](https://yarnpkg.com/):
 $ yarn add @joshdoesthis/react-ui
 ```
 
+## Theme props
+
+(WIP)
+
+| Prop    | Type     | Description           |
+| ------- | -------- | --------------------- |
+| `theme` | `object` | The theme of the app. |
+
 ## Box props
 
 | Prop         | Type      | Description                           |
@@ -78,10 +86,7 @@ $ yarn add @joshdoesthis/react-ui
 
 ## Markdown props
 
-(wip)
-
-| Prop | Type | Description |
-| ---- | ---- | ----------- |
+(WIP)
 
 ## Passcode props
 
