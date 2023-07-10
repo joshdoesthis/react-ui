@@ -23,25 +23,6 @@ export const Torch = ({
   )
 
   useEffect(() => {
-    localStorage.setItem('darkMode', darkMode)
-    const autoMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light'
-    const meta = document.querySelector('meta[name="theme-color"]')
-    meta.setAttribute('content', darkMode === 'auto' ? autoMode : darkMode)
-    document.documentElement.setAttribute(
-      'data-theme',
-      darkMode === 'auto' ? autoMode : darkMode
-    )
-    const change = e => {
-      const autoMode = e.matches ? 'dark' : 'light'
-      const meta = document.querySelector('meta[name="theme-color"]')
-      meta.setAttribute('content', darkMode === 'auto' ? autoMode : darkMode)
-      document.documentElement.setAttribute(
-        'data-theme',
-        darkMode === 'auto' ? autoMode : darkMode
-      )
-    }
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', change)
@@ -50,7 +31,28 @@ export const Torch = ({
         .matchMedia('(prefers-color-scheme: dark)')
         .removeEventListener('change', change)
     }
-  }, [darkMode])
+  }, [])
+
+  useEffect(() => change, [darkMode])
+
+  const change = () => {
+    localStorage.setItem('darkMode', darkMode)
+    const autoMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+    const meta = document.querySelector('meta[name="theme-color"]')
+    meta.setAttribute(
+      'content',
+      {
+        light: theme.light.background,
+        dark: theme.dark.background
+      }[darkMode === 'auto' ? autoMode : darkMode]
+    )
+    document.documentElement.setAttribute(
+      'data-theme',
+      darkMode === 'auto' ? autoMode : darkMode
+    )
+  }
 
   const next = () => {
     const mode = {

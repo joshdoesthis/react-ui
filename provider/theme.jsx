@@ -1,22 +1,21 @@
 import React from 'react'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { defaultTheme } from '../lib/theme'
 
 const ThemeContext = createContext()
 export const useTheme = () => useContext(ThemeContext)
 
-export const Theme = ({ children, config }) => {
-  const [state, setState] = useState({})
+export const Theme = ({ children, theme = defaultTheme }) => {
+  const [state, setState] = useState(theme)
 
-  const set = obj => {
-    if (obj instanceof Function) return setState(obj)
-    setState({ ...state, ...obj })
-  }
+  useEffect(() => {
+    setState(theme)
+  }, [theme])
 
   return (
     <ThemeContext.Provider
       value={{
-        ...state,
-        set
+        ...state
       }}
     >
       {children}
