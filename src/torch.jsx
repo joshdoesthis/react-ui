@@ -21,7 +21,6 @@ export const Torch = ({
   const [mode, setMode] = useState(localStorage.getItem('mode') ?? defaultMode)
 
   const change = () => {
-    console.log('change')
     localStorage.setItem('mode', mode)
     const autoMode = window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
