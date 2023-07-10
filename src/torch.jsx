@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Button } from './button'
 import { Text } from './text'
 import { toFirstUpper } from '../lib/helpers'
@@ -57,9 +57,9 @@ export const Torch = ({
         .matchMedia('(prefers-color-scheme: dark)')
         .removeEventListener('change', change)
     }
-  }, [])
+  }, [mode])
 
-  useEffect(() => change(), [mode])
+  useEffect(change, [mode])
 
   return <SwitchComponent mode={mode} cycle={next} />
 }
