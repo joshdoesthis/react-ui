@@ -1,49 +1,65 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Button } from './button'
-import { Input } from './input'
 import { Text } from './text'
+import { toFirstUpper } from '../lib/helpers'
+import { useTheme } from '../provider/theme'
 
-const DefaultSwitchComponent = ({ darkMode, toggleDarkMode }) => {
+const DefaultSwitchComponent = ({ darkMode, cycle }) => {
   return (
-    <Button press={toggleDarkMode}>
-      <Input type='checkbox' checked={darkMode} readOnly />
-      <Text>Dark Mode</Text>
+    <Button press={cycle}>
+      <Text>{toFirstUpper(darkMode)} mode</Text>
     </Button>
   )
 }
 
-export const Torch = ({ SwitchComponent = DefaultSwitchComponent }) => {
+export const Torch = ({
+  defaultMode = 'auto',
+  SwitchComponent = DefaultSwitchComponent
+}) => {
+  const theme = useTheme()
   const [darkMode, setDarkMode] = useState(
-    JSON.parse(localStorage.getItem('dark_mode')) ??
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+    localStorage.getItem('darkMode') ?? defaultMode
   )
 
-  const toggle = mode => {
-    localStorage.setItem('dark_mode', mode)
+  useEffect(() => {
+    localStorage.setItem('darkMode', darkMode)
+    const autoMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+    const meta = document.querySelector('meta[name="theme-color"]')
+    meta.setAttribute('content', darkMode === 'auto' ? autoMode : darkMode)
+    document.documentElement.setAttribute(
+      'data-theme',
+      darkMode === 'auto' ? autoMode : darkMode
+    )
+    const change = e => {
+      const autoMode = e.matches ? 'dark' : 'light'
+      const meta = document.querySelector('meta[name="theme-color"]')
+      meta.setAttribute('content', darkMode === 'auto' ? autoMode : darkMode)
+      document.documentElement.setAttribute(
+        'data-theme',
+        darkMode === 'auto' ? autoMode : darkMode
+      )
+    }
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', change)
+    return () => {
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', change)
+    }
+  }, [darkMode])
+
+  const next = () => {
+    const mode = {
+      light: 'dark',
+      dark: 'auto',
+      auto: 'light'
+    }[darkMode]
     setDarkMode(mode)
   }
 
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-theme',
-      darkMode ? 'dark' : 'light'
-    )
-    const meta = document.querySelector('meta[name="theme-color"]')
-    meta.setAttribute('content', darkMode ? '#27272a' : '#f4f4f5')
-  }, [darkMode])
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const change = e => toggle(e.matches)
-    mediaQuery.addEventListener('change', change)
-    return () => mediaQuery.removeEventListener('change', change)
-  }, [])
-
-  return SwitchComponent ? (
-    <SwitchComponent
-      darkMode={darkMode}
-      toggleDarkMode={() => toggle(!darkMode)}
-    />
-  ) : null
+  return <SwitchComponent darkMode={darkMode} cycle={next} />
 }
