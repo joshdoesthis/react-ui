@@ -5,10 +5,10 @@ import { Text } from './text'
 import { toFirstUpper } from '../lib/helpers'
 import { useTheme } from '../provider/theme'
 
-const DefaultSwitchComponent = ({ darkMode, cycle }) => {
+const DefaultSwitchComponent = ({ mode, cycle }) => {
   return (
     <Button press={cycle}>
-      <Text>{toFirstUpper(darkMode)} mode</Text>
+      <Text>{toFirstUpper(mode)} mode</Text>
     </Button>
   )
 }
@@ -18,9 +18,7 @@ export const Torch = ({
   SwitchComponent = DefaultSwitchComponent
 }) => {
   const theme = useTheme()
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem('darkMode') ?? defaultMode
-  )
+  const [mode, setMode] = useState(localStorage.getItem('mode') ?? defaultMode)
 
   useEffect(() => {
     window
@@ -33,10 +31,10 @@ export const Torch = ({
     }
   }, [])
 
-  useEffect(() => change, [darkMode])
+  useEffect(() => change, [mode])
 
   const change = () => {
-    localStorage.setItem('darkMode', darkMode)
+    localStorage.setItem('mode', mode)
     const autoMode = window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
       : 'light'
@@ -46,22 +44,22 @@ export const Torch = ({
       {
         light: theme.light.background,
         dark: theme.dark.background
-      }[darkMode === 'auto' ? autoMode : darkMode]
+      }[mode === 'auto' ? autoMode : mode]
     )
     document.documentElement.setAttribute(
       'data-theme',
-      darkMode === 'auto' ? autoMode : darkMode
+      mode === 'auto' ? autoMode : mode
     )
   }
 
   const next = () => {
-    const mode = {
+    const nextMode = {
       light: 'dark',
       dark: 'auto',
       auto: 'light'
-    }[darkMode]
-    setDarkMode(mode)
+    }[mode]
+    setMode(nextMode)
   }
 
-  return <SwitchComponent darkMode={darkMode} cycle={next} />
+  return <SwitchComponent mode={mode} cycle={next} />
 }

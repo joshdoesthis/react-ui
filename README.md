@@ -128,13 +128,16 @@ $ yarn add @joshdoesthis/react-ui
 
 ## Torch props
 
+defaultMode = 'auto'
+
 | Prop              | Type   | Description                                                             |
 | ----------------- | ------ | ----------------------------------------------------------------------- |
+| `defaultMode`     | `enum` | The default mode of the Torch. Options are `auto`, `light`, and `dark`. |
 | `SwitchComponent` | `func` | A component to render the Switch. Defaults to `DefaultSwitchComponent`. |
 
 ### SwitchComponent props
 
-| Prop             | Type      | Description                                   |
-| ---------------- | --------- | --------------------------------------------- |
-| `darkMode`       | `boolean` | Whether or not dark mode is enabled.          |
-| `toggleDarkMode` | `func`    | A function to call when dark mode is toggled. |
+| Prop    | Type   | Description                                 |
+| ------- | ------ | ------------------------------------------- |
+| `mode`  | `enum` | The mode of the Torch.                      |
+| `cycle` | `func` | A function to call when the mode is cycled. |
