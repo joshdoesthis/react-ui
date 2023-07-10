@@ -20,20 +20,8 @@ export const Torch = ({
   const theme = useTheme()
   const [mode, setMode] = useState(localStorage.getItem('mode') ?? defaultMode)
 
-  useEffect(() => {
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', change)
-    return () => {
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', change)
-    }
-  }, [])
-
-  useEffect(() => change, [mode])
-
   const change = () => {
+    console.log('change')
     localStorage.setItem('mode', mode)
     const autoMode = window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
@@ -60,6 +48,19 @@ export const Torch = ({
     }[mode]
     setMode(nextMode)
   }
+
+  useEffect(() => {
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', change)
+    return () => {
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', change)
+    }
+  }, [])
+
+  useEffect(() => change(), [mode])
 
   return <SwitchComponent mode={mode} cycle={next} />
 }
