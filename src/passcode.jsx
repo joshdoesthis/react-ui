@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { Box } from './box'
 import { Text } from './text'
-import { toFirstUpper } from '../lib/helpers'
+import { toFirstUpper } from '../lib/util'
 
 export const Passcode = ({ label = '', ok, message, change = () => {} }) => {
   const [passcode, setPasscode] = useState({

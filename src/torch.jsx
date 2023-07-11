@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { Button } from './button'
 import { Text } from './text'
-import { toFirstUpper } from '../lib/helpers'
+import { toFirstUpper } from '../lib/util'
 import { useTheme } from '../provider/theme'
 
 const DefaultSwitchComponent = ({ mode, cycle }) => {
@@ -49,6 +49,7 @@ export const Torch = ({
   }
 
   useEffect(() => {
+    change()
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', change)
@@ -58,8 +59,6 @@ export const Torch = ({
         .removeEventListener('change', change)
     }
   }, [mode])
-
-  useEffect(change, [mode])
 
   return <SwitchComponent mode={mode} cycle={next} />
 }

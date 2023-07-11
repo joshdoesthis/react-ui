@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Box } from './box'
 import { Button } from './button'
 import { Text } from './text'
-import { toTitleCase, toFirstUpper } from '../lib/helpers'
+import { toTitleCase, toFirstUpper } from '../lib/util'
 
 const DefaultOptionComponent = ({ name, value, active = false, select }) => {
   return (

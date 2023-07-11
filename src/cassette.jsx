@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Box } from './box'
 import { Button } from './button'
-import { toTitleCase } from '../lib/helpers'
+import { toTitleCase } from '../lib/util'
 
 const DefaultOptionComponent = ({ name, value, active = false, select }) => {
   return (

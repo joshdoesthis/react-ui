@@ -2,7 +2,7 @@ import React from 'react'
 import { useRef, useEffect, useState } from 'react'
 import { Box } from './box'
 import { Text } from './text'
-import { toFirstUpper } from '../lib/helpers'
+import { toFirstUpper } from '../lib/util'
 
 export const Input = ({
   id = '',

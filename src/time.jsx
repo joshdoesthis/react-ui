@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Box } from './box'
 import { Input } from './input'
 import { Text } from './text'
-import { toFirstUpper } from '../lib/helpers'
+import { toFirstUpper } from '../lib/util'
 import { getDaysInMonth } from 'date-fns'
 
 export const Time = ({ label = '', change = () => {}, blur = () => {} }) => {

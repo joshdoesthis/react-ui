@@ -1,24 +1,13 @@
 import React from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { defaultTheme } from '../lib/theme'
+import { defaultStyle } from '../lib/theme'
+import { mergeCommon } from '../lib/util'
 
 const ThemeContext = createContext()
 export const useTheme = () => useContext(ThemeContext)
 
-export const Theme = ({ children, theme = defaultTheme }) => {
-  const [state, setState] = useState(theme)
+export const Theme = ({ children, style = {} }) => {
+  const theme = mergeCommon(defaultStyle, style)
 
-  useEffect(() => {
-    setState(theme)
-  }, [theme])
-
-  return (
-    <ThemeContext.Provider
-      value={{
-        ...state
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
 }
