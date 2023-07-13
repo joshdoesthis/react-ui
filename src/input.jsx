@@ -42,7 +42,7 @@ export const Input = ({
 
   const set = type => e => {
     if (type === 'multiline') {
-      setValue(e.target.innerText)
+      setValue(e.target.innerText.replace(/\u00a0/g, ' '))
     } else {
       setValue(e.target.value)
     }
@@ -74,7 +74,18 @@ export const Input = ({
           data-ok={ok}
           onBlur={blur}
           onInput={set(type)}
+          style={{
+            whiteSpace: 'pre-wrap'
+          }}
         />
+        {/* <textarea
+          id={id}
+          name={name}
+          // value={defaultValue}
+          data-ok={ok}
+          onBlur={blur}
+          onChange={set(type)}
+        /> */}
       </Box>
     )
   }

@@ -6,7 +6,11 @@ import { Text } from './text'
 import { toFirstUpper } from '../lib/util'
 import { getDaysInMonth } from 'date-fns'
 
-export const Time = ({ label = '', change = () => {}, blur = () => {} }) => {
+export const DateTime = ({
+  label = '',
+  change = () => {},
+  blur = () => {}
+}) => {
   const [state, setState] = useState({
     day: { ok: true, data: new Date().getDate() },
     month: { ok: true, data: new Date().getMonth() + 1 },

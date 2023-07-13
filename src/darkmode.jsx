@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from './button'
 import { Text } from './text'
 import { toFirstUpper } from '../lib/util'
@@ -13,7 +13,7 @@ const DefaultSwitchComponent = ({ mode, cycle }) => {
   )
 }
 
-export const Torch = ({
+export const DarkMode = ({
   defaultMode = 'auto',
   SwitchComponent = DefaultSwitchComponent
 }) => {
@@ -29,8 +29,8 @@ export const Torch = ({
     meta.setAttribute(
       'content',
       {
-        light: theme.light.background,
-        dark: theme.dark.background
+        light: 'white',
+        dark: 'black'
       }[mode === 'auto' ? autoMode : mode]
     )
     document.documentElement.setAttribute(

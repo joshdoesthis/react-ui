@@ -1,5 +1,7 @@
 # React UI
 
+A simple UI library for React apps.
+
 ## Installation
 
 Using [npm](https://www.npmjs.com/):
@@ -14,7 +16,7 @@ Using [yarn](https://yarnpkg.com/):
 $ yarn add @joshdoesthis/react-ui
 ```
 
-## Theme props
+## Theme
 
 (WIP)
 
@@ -22,14 +24,14 @@ $ yarn add @joshdoesthis/react-ui
 | ------- | -------- | --------------------- |
 | `theme` | `object` | The theme of the app. |
 
-## Box props
+## Box
 
 | Prop         | Type      | Description                           |
 | ------------ | --------- | ------------------------------------- |
 | `forwardRef` | `object`  | A ref to the underlying HTML element. |
 | `visible`    | `boolean` | Whether or not the Box is visible.    |
 
-## Button props
+## Button
 
 | Prop         | Type       | Description                                                 |
 | ------------ | ---------- | ----------------------------------------------------------- |
@@ -38,7 +40,7 @@ $ yarn add @joshdoesthis/react-ui
 | `disabled`   | `boolean`  | Whether or not the Button is disabled. Defaults to `false`. |
 | `press`      | `function` | A function to call when the Button is pressed.              |
 
-## Cassette props
+## Cassette
 
 | Prop              | Type       | Description                                                              |
 | ----------------- | ---------- | ------------------------------------------------------------------------ |
@@ -47,7 +49,7 @@ $ yarn add @joshdoesthis/react-ui
 | `change`          | `function` | A function to call when the Cassette's value changes.                    |
 | `OptionComponent` | `function` | A component to render each option. Defaults to `DefaultOptionComponent`. |
 
-### OptionComponent props
+### OptionComponent
 
 | Prop     | Type       | Description                                                                     |
 | -------- | ---------- | ------------------------------------------------------------------------------- |
@@ -56,7 +58,7 @@ $ yarn add @joshdoesthis/react-ui
 | `active` | `boolean`  | Whether or not the option is active. Defaults to `false`.                       |
 | `select` | `function` | A function to call when the option is selected. References Cassette's `change`. |
 
-## Drawer props
+## Drawer
 
 | Prop           | Type       | Description                                                                        |
 | -------------- | ---------- | ---------------------------------------------------------------------------------- |
@@ -64,13 +66,13 @@ $ yarn add @joshdoesthis/react-ui
 | `close`        | `function` | A function to call when the Drawer is closed.                                      |
 | `TopComponent` | `function` | A component to render at the top of the Drawer. Defaults to `DefaultTopComponent`. |
 
-### TopComponent props
+### TopComponent
 
 | Prop    | Type       | Description                                                                |
 | ------- | ---------- | -------------------------------------------------------------------------- |
 | `close` | `function` | A function to call when the Drawer is closed. References Drawer's `close`. |
 
-## Input props
+## Input
 
 | Prop           | Type       | Description                                                                |
 | -------------- | ---------- | -------------------------------------------------------------------------- |
@@ -84,11 +86,13 @@ $ yarn add @joshdoesthis/react-ui
 | `change`       | `function` | A function to call when the Input's value changes.                         |
 | `blur`         | `function` | A function to call when the Input is blurred. References Input's `change`. |
 
-## Markdown props
+## Markdown
 
-(WIP)
+| Prop       | Type     | Description             |
+| ---------- | -------- | ----------------------- |
+| `children` | `string` | The markdown to render. |
 
-## Passcode props
+## Passcode
 
 | Prop      | Type       | Description                                            |
 | --------- | ---------- | ------------------------------------------------------ |
@@ -97,7 +101,7 @@ $ yarn add @joshdoesthis/react-ui
 | `message` | `string`   | The message of the Passcode.                           |
 | `change`  | `function` | A function to call when the Passcode's value changes.  |
 
-## Select props
+## Select
 
 | Prop              | Type       | Description                                                              |
 | ----------------- | ---------- | ------------------------------------------------------------------------ |
@@ -107,7 +111,7 @@ $ yarn add @joshdoesthis/react-ui
 | `OptionComponent` | `function` | A component to render each option. Defaults to `DefaultOptionComponent`. |
 | `change`          | `function` | A function to call when the Select's value changes.                      |
 
-### OptionComponent props
+### OptionComponent
 
 | Prop     | Type       | Description                                                                   |
 | -------- | ---------- | ----------------------------------------------------------------------------- |
@@ -116,14 +120,14 @@ $ yarn add @joshdoesthis/react-ui
 | `active` | `boolean`  | Whether or not the option is active. Defaults to `false`.                     |
 | `select` | `function` | A function to call when the option is selected. References Select's `change`. |
 
-## Text props
+## Text
 
 (wip)
 
 | Prop | Type | Description |
 | ---- | ---- | ----------- |
 
-## Time props
+## DateTime
 
 | Prop     | Type       | Description                                                              |
 | -------- | ---------- | ------------------------------------------------------------------------ |
@@ -131,7 +135,7 @@ $ yarn add @joshdoesthis/react-ui
 | `change` | `function` | A function to call when the Time's value changes.                        |
 | `blur`   | `function` | A function to call when the Time is blurred. References Time's `change`. |
 
-## Torch props
+## DarkMode
 
 defaultMode = 'auto'
 
@@ -140,7 +144,7 @@ defaultMode = 'auto'
 | `defaultMode`     | `enum`     | The default mode of the Torch. Options are `auto`, `light`, and `dark`. |
 | `SwitchComponent` | `function` | A component to render the Switch. Defaults to `DefaultSwitchComponent`. |
 
-### SwitchComponent props
+### SwitchComponent
 
 | Prop    | Type       | Description                                 |
 | ------- | ---------- | ------------------------------------------- |

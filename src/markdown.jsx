@@ -1,11 +1,11 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { Box } from './box'
+import MDX from 'markdown-to-jsx'
 
 export const Markdown = ({ children }) => {
   return (
     <Box>
-      <ReactMarkdown children={children} />
+      <MDX>{children}</MDX>
     </Box>
   )
 }
