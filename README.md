@@ -16,6 +16,24 @@ Using [yarn](https://yarnpkg.com/):
 $ yarn add @joshdoesthis/react-ui
 ```
 
+## Usage
+
+**Theme is required for all components to work properly as it initialises tailwind and provides context for styles.**
+
+```jsx
+import { Theme, Box, Button } from '@joshdoesthis/react-ui'
+
+const App = () => {
+  return (
+    <Theme>
+      <Box>
+        <Button>Click Me</Button>
+      </Box>
+    </Theme>
+  )
+}
+```
+
 ## Theme
 
 (WIP)
