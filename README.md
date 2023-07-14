@@ -18,16 +18,25 @@ $ yarn add @joshdoesthis/react-ui
 
 ## Usage
 
-**Theme is required for all components to work properly as it initialises tailwind and provides context for styles.**
+**`Theme` is required in the top-level of the app as it initialises tailwind and provides context to components.**
 
 ```jsx
-import { Theme, Box, Button } from '@joshdoesthis/react-ui'
+import { Theme, Box, Text, Button } from '@joshdoesthis/react-ui'
 
 const App = () => {
+  const [count, setCount] = useState(0)
+
+  const increment = () => {
+    setCount(() => count + 1)
+  }
+
   return (
     <Theme>
       <Box>
-        <Button>Click Me</Button>
+        <Text h1>React UI</Text>
+        <Text p>A simple UI library for React apps.</Text>
+        <Text p>Count: {count}</Text>
+        <Button press={increment}>Click me!</Button>
       </Box>
     </Theme>
   )
@@ -36,18 +45,17 @@ const App = () => {
 
 ## Theme
 
-(WIP)
-
 | Prop    | Type     | Description           |
 | ------- | -------- | --------------------- |
 | `theme` | `object` | The theme of the app. |
 
 ## Box
 
-| Prop         | Type      | Description                           |
-| ------------ | --------- | ------------------------------------- |
-| `forwardRef` | `object`  | A ref to the underlying HTML element. |
-| `visible`    | `boolean` | Whether or not the Box is visible.    |
+| Prop         | Type      | Description                               |
+| ------------ | --------- | ----------------------------------------- |
+| `forwardRef` | `object`  | A ref to the underlying HTML element.     |
+| `style`      | `string`  | Any tailwind classes to apply to the Box. |
+| `visible`    | `boolean` | Whether or not the Box is visible.        |
 
 ## Button
 
@@ -56,6 +64,7 @@ const App = () => {
 | `forwardRef` | `object`   | A ref to the underlying HTML element.                       |
 | `active`     | `boolean`  | Whether or not the Button is active. Defaults to `false`.   |
 | `disabled`   | `boolean`  | Whether or not the Button is disabled. Defaults to `false`. |
+| `style`      | `string`   | Any tailwind classes to apply to the Button.                |
 | `press`      | `function` | A function to call when the Button is pressed.              |
 
 ## Cassette
@@ -82,6 +91,7 @@ const App = () => {
 | -------------- | ---------- | ---------------------------------------------------------------------------------- |
 | `visible`      | `boolean`  | Whether or not the Drawer is visible. Defaults to `false`.                         |
 | `close`        | `function` | A function to call when the Drawer is closed.                                      |
+| `style`        | `string`   | Any tailwind classes to apply to the Drawer.                                       |
 | `TopComponent` | `function` | A component to render at the top of the Drawer. Defaults to `DefaultTopComponent`. |
 
 ### TopComponent
@@ -101,6 +111,7 @@ const App = () => {
 | `defaultValue` | `string`   | The default value of the Input.                                            |
 | `ok`           | `boolean`  | Whether or not the Input is ok. Defaults to `true`.                        |
 | `message`      | `string`   | The message of the Input.                                                  |
+| `style`        | `string`   | Any tailwind classes to apply to the Input.                                |
 | `change`       | `function` | A function to call when the Input's value changes.                         |
 | `blur`         | `function` | A function to call when the Input is blurred. References Input's `change`. |
 
@@ -140,31 +151,39 @@ const App = () => {
 
 ## Text
 
-(wip)
-
-| Prop | Type | Description |
-| ---- | ---- | ----------- |
+| Prop       | Type      | Description                                            |
+| ---------- | --------- | ------------------------------------------------------ |
+| `children` | `string`  | The text to render.                                    |
+| `style`    | `string`  | Any tailwind classes to apply to the text.             |
+| `span`     | `boolean` | Whether or not the text is a span. Defaults to `true`. |
+| `p`        | `boolean` | Whether or not the text is a p. Defaults to `false`.   |
+| `h1`       | `boolean` | Whether or not the text is an h1. Defaults to `false`. |
+| `h2`       | `boolean` | Whether or not the text is an h2. Defaults to `false`. |
+| `h3`       | `boolean` | Whether or not the text is an h3. Defaults to `false`. |
+| `h4`       | `boolean` | Whether or not the text is an h4. Defaults to `false`. |
+| `h5`       | `boolean` | Whether or not the text is an h5. Defaults to `false`. |
+| `h6`       | `boolean` | Whether or not the text is an h6. Defaults to `false`. |
+| `ol`       | `boolean` | Whether or not the text is ol. Defaults to `false`.    |
+| `ul`       | `boolean` | Whether or not the text is ul. Defaults to `false`.    |
+| `li`       | `boolean` | Whether or not the text is li. Defaults to `false`.    |
 
 ## DateTime
 
-| Prop     | Type       | Description                                                              |
-| -------- | ---------- | ------------------------------------------------------------------------ |
-| `label`  | `string`   | The label of the Time.                                                   |
-| `change` | `function` | A function to call when the Time's value changes.                        |
-| `blur`   | `function` | A function to call when the Time is blurred. References Time's `change`. |
+| Prop     | Type       | Description                                       |
+| -------- | ---------- | ------------------------------------------------- |
+| `label`  | `string`   | The label of the DateTime.                        |
+| `change` | `function` | A function to call when DateTime's value changes. |
 
 ## DarkMode
 
-defaultMode = 'auto'
-
-| Prop              | Type       | Description                                                             |
-| ----------------- | ---------- | ----------------------------------------------------------------------- |
-| `defaultMode`     | `enum`     | The default mode of the Torch. Options are `auto`, `light`, and `dark`. |
-| `SwitchComponent` | `function` | A component to render the Switch. Defaults to `DefaultSwitchComponent`. |
+| Prop              | Type       | Description                                                                                |
+| ----------------- | ---------- | ------------------------------------------------------------------------------------------ |
+| `defaultMode`     | `enum`     | The default mode of the DarkMode. Options are `auto`, `light`, `dark`. Defaults to `auto`. |
+| `SwitchComponent` | `function` | A component to render the Switch. Defaults to `DefaultSwitchComponent`.                    |
 
 ### SwitchComponent
 
 | Prop    | Type       | Description                                 |
 | ------- | ---------- | ------------------------------------------- |
-| `mode`  | `enum`     | The mode of the Torch.                      |
+| `mode`  | `enum`     | The current mode of the DarkMode.           |
 | `cycle` | `function` | A function to call when the mode is cycled. |

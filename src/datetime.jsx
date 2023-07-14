@@ -6,11 +6,7 @@ import { Text } from './text'
 import { toFirstUpper } from '../lib/util'
 import { getDaysInMonth } from 'date-fns'
 
-export const DateTime = ({
-  label = '',
-  change = () => {},
-  blur = () => {}
-}) => {
+export const DateTime = ({ label = '', change = () => {} }) => {
   const [state, setState] = useState({
     day: { ok: true, data: new Date().getDate() },
     month: { ok: true, data: new Date().getMonth() + 1 },
@@ -61,11 +57,7 @@ export const DateTime = ({
 
   return (
     <>
-      {label ? (
-        <Text variant='label' size='sm'>
-          {toFirstUpper(label)}
-        </Text>
-      ) : null}
+      {label ? <Text>{toFirstUpper(label)}</Text> : null}
       <Box>
         {Object.entries(state).map(([name, { ok, message, data }]) => (
           <Input

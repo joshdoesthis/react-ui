@@ -2,7 +2,7 @@ import React from 'react'
 import { useRef, useEffect, useState } from 'react'
 import { Box } from './box'
 import { Text } from './text'
-import { toFirstUpper } from '../lib/util'
+import { toFirstUpper, mergeStyles } from '../lib/util'
 
 export const Input = ({
   defaultValue = '',
@@ -13,6 +13,7 @@ export const Input = ({
   ok = true,
   size = 'default',
   type = 'default',
+  style = '',
   blur = () => {},
   change = () => {}
 }) => {
@@ -78,10 +79,12 @@ export const Input = ({
     text: 'bg-gray-100'
   }
 
-  const classes = `
+  const defaultStyle = `
     ${types[type]}
     ${sizes[size]}
   `
+
+  const classes = mergeStyles(defaultStyle, style)
 
   if (type === 'multiline') {
     return (

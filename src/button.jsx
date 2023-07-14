@@ -1,12 +1,14 @@
 import React from 'react'
+import { mergeStyles } from '../lib/util'
 
 export const Button = ({
   children,
   forwardRef = null,
-  active = false,
-  disabled = false,
   type = 'default',
   size = 'default',
+  active = false,
+  disabled = false,
+  style = '',
   press = () => {}
 }) => {
   const sizes = {
@@ -28,13 +30,15 @@ export const Button = ({
     text: 'bg-transparent hover:bg-transparent'
   }
 
-  const classes = `
+  const defaultStyle = `
     ${types[type]}
     ${sizes[size]}
     rounded
     transition duration-200 ease-in-out
     cursor-pointer
   `
+
+  const classes = mergeStyles(defaultStyle, style)
 
   return (
     <button

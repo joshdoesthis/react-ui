@@ -15,8 +15,8 @@ const DefaultTopComponent = ({ close }) => {
 export const Drawer = ({
   children,
   visible = false,
-  close,
   style = '',
+  close,
   TopComponent = DefaultTopComponent
 }) => {
   const [visibility, setVisibility] = useState(visible)
