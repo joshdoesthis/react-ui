@@ -5,15 +5,16 @@ import { Text } from './text'
 import { toFirstUpper } from '../lib/util'
 
 export const Input = ({
+  defaultValue = '',
   id = '',
   label = '',
-  name = '',
-  type = 'text',
-  defaultValue = '',
-  ok = true,
   message = '',
-  change = () => {},
-  blur = () => {}
+  name = '',
+  ok = true,
+  size = 'default',
+  type = 'default',
+  blur = () => {},
+  change = () => {}
 }) => {
   const [value, setValue] = useState(defaultValue)
   const ref = useRef(null)
@@ -61,6 +62,27 @@ export const Input = ({
     }
   }
 
+  const sizes = {
+    default: 'py-1 px-2 text-sm',
+    xs: 'py-0.5 px-1 text-xs',
+    sm: 'py-1 px-2 text-sm',
+    md: 'py-2 px-4 text-base',
+    lg: 'py-3 px-6 text-lg',
+    xl: 'py-4 px-8 text-xl'
+  }
+
+  const types = {
+    default: 'bg-gray-100',
+    multiline: 'whitespace-pre-wrap',
+    email: 'bg-gray-100',
+    text: 'bg-gray-100'
+  }
+
+  const classes = `
+    ${types[type]}
+    ${sizes[size]}
+  `
+
   if (type === 'multiline') {
     return (
       <Box>
@@ -72,20 +94,10 @@ export const Input = ({
           contentEditable
           suppressContentEditableWarning
           data-ok={ok}
+          className={classes}
           onBlur={blur}
           onInput={set(type)}
-          style={{
-            whiteSpace: 'pre-wrap'
-          }}
         />
-        {/* <textarea
-          id={id}
-          name={name}
-          // value={defaultValue}
-          data-ok={ok}
-          onBlur={blur}
-          onChange={set(type)}
-        /> */}
       </Box>
     )
   }
@@ -100,6 +112,7 @@ export const Input = ({
         name={name}
         value={value}
         data-ok={ok}
+        className={classes}
         onBlur={blur}
         onChange={set(type)}
       />

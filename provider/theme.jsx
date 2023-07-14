@@ -12,10 +12,11 @@ const setup = theme => {
     presets: [presetAutoprefix(), presetTailwind(), presetExt()],
     darkMode: 'class',
     preflight: {
-      'html': { height: '100%' },
+      'html': { '@apply': 'min-h-full' },
       'html[data-theme=dark]': theme.dark,
       'html[data-theme=light]': theme.light,
-      'body': { height: '100%' }
+      'body': { '@apply': 'h-full' },
+      '#root': { '@apply': 'h-full' }
     }
   })
   install(config)
