@@ -1,17 +1,12 @@
 import React from 'react'
 import { useRef, useEffect, useState } from 'react'
-import { Box } from './box'
-import { Text } from './text'
-import { toFirstUpper } from '../lib/util'
 
 export const Input = ({
-  defaultValue = '',
   id = '',
   type = 'default',
   name = '',
-  label = '',
+  defaultValue = '',
   ok = true,
-  message = '',
   style = '',
   blur = () => {},
   change = () => {}
@@ -64,37 +59,29 @@ export const Input = ({
 
   if (type === 'multiline') {
     return (
-      <Box>
-        {label ? <Text>{toFirstUpper(label)}</Text> : null}
-        {message ? <Text>{message}</Text> : null}
-        <div
-          ref={ref}
-          id={id}
-          contentEditable
-          suppressContentEditableWarning
-          data-ok={ok}
-          className={style}
-          onBlur={blur}
-          onInput={set(type)}
-        />
-      </Box>
+      <div
+        ref={ref}
+        id={id}
+        contentEditable
+        suppressContentEditableWarning
+        data-ok={ok}
+        className={style}
+        onBlur={blur}
+        onInput={set(type)}
+      />
     )
   }
 
   return (
-    <Box>
-      {label ? <Text>{toFirstUpper(label)}</Text> : null}
-      {message ? <Text>{message}</Text> : null}
-      <input
-        id={id}
-        type={type}
-        name={name}
-        value={value}
-        data-ok={ok}
-        className={style}
-        onBlur={blur}
-        onChange={set(type)}
-      />
-    </Box>
+    <input
+      id={id}
+      type={type}
+      name={name}
+      value={value}
+      data-ok={ok}
+      className={style}
+      onBlur={blur}
+      onChange={set(type)}
+    />
   )
 }
