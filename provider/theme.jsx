@@ -17,7 +17,19 @@ const setup = theme => {
       'html[data-theme=light]': theme.light,
       'body': { '@apply': 'h-full' },
       '#root': { '@apply': 'h-full' }
-    }
+    },
+    rules: [
+      ['row', { '@apply': 'flex flex-row' }],
+      ['col', { '@apply': 'flex flex-col' }],
+      [
+        '(start|end|center|baseline|stretch)-(normal|start|end|center|between|around|evenly|stretch)',
+        match => ({ '@apply': `items-${match[1]} justify-${match[2]}` })
+      ],
+      ['safe-top', { paddingTop: 'env(safe-area-inset-top)' }],
+      ['safe-bottom', { paddingBottom: 'env(safe-area-inset-bottom)' }],
+      ['safe-left', { paddingLeft: 'env(safe-area-inset-left)' }],
+      ['safe-right', { paddingRight: 'env(safe-area-inset-right)' }]
+    ]
   })
   install(config)
 }
