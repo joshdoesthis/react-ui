@@ -2,17 +2,16 @@ import React from 'react'
 import { useRef, useEffect, useState } from 'react'
 import { Box } from './box'
 import { Text } from './text'
-import { toFirstUpper, mergeStyles } from '../lib/util'
+import { toFirstUpper } from '../lib/util'
 
 export const Input = ({
   defaultValue = '',
   id = '',
-  label = '',
-  message = '',
-  name = '',
-  ok = true,
-  size = 'default',
   type = 'default',
+  name = '',
+  label = '',
+  ok = true,
+  message = '',
   style = '',
   blur = () => {},
   change = () => {}
@@ -63,29 +62,6 @@ export const Input = ({
     }
   }
 
-  const sizes = {
-    default: 'py-1 px-2 text-sm',
-    xs: 'py-0.5 px-1 text-xs',
-    sm: 'py-1 px-2 text-sm',
-    md: 'py-2 px-4 text-base',
-    lg: 'py-3 px-6 text-lg',
-    xl: 'py-4 px-8 text-xl'
-  }
-
-  const types = {
-    default: 'bg-gray-100',
-    multiline: 'whitespace-pre-wrap',
-    email: 'bg-gray-100',
-    text: 'bg-gray-100'
-  }
-
-  const defaultStyle = `
-    ${types[type]}
-    ${sizes[size]}
-  `
-
-  const classes = mergeStyles(defaultStyle, style)
-
   if (type === 'multiline') {
     return (
       <Box>
@@ -97,7 +73,7 @@ export const Input = ({
           contentEditable
           suppressContentEditableWarning
           data-ok={ok}
-          className={classes}
+          className={style}
           onBlur={blur}
           onInput={set(type)}
         />
@@ -115,7 +91,7 @@ export const Input = ({
         name={name}
         value={value}
         data-ok={ok}
-        className={classes}
+        className={style}
         onBlur={blur}
         onChange={set(type)}
       />

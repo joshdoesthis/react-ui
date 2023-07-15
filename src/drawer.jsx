@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { Box } from './box'
 import { Button } from './button'
-import { mergeStyles } from '../lib/util'
 
 const DefaultTopComponent = ({ close }) => {
   return (
@@ -36,18 +35,8 @@ export const Drawer = ({
     return () => document.removeEventListener('click', click)
   }, [visibility])
 
-  const defaultStyle = [
-    'col',
-    'data-[visible=true]:visible',
-    'data-[visible=false]:hidden',
-    'fixed top-0 right-0 bottom-0 z-50',
-    'bg-white dark:bg-black',
-    'text-black dark:text-white'
-  ].join(' ')
-  const classes = mergeStyles(defaultStyle, style)
-
   return (
-    <Box forwardRef={ref} visible={visible} style={classes}>
+    <Box forwardRef={ref} visible={visible} style={style}>
       <TopComponent close={close} />
       {children}
     </Box>

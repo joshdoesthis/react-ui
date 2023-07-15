@@ -28,7 +28,9 @@ const setup = theme => {
       ['safe-top', { paddingTop: 'env(safe-area-inset-top)' }],
       ['safe-bottom', { paddingBottom: 'env(safe-area-inset-bottom)' }],
       ['safe-left', { paddingLeft: 'env(safe-area-inset-left)' }],
-      ['safe-right', { paddingRight: 'env(safe-area-inset-right)' }]
+      ['safe-right', { paddingRight: 'env(safe-area-inset-right)' }],
+      ['safe-v', { '@apply': 'safe-top safe-bottom' }],
+      ['safe-h', { '@apply': 'safe-left safe-right' }]
     ]
   })
   install(config)
