@@ -12,15 +12,28 @@ const setup = theme => {
     presets: [presetAutoprefix(), presetTailwind(), presetExt()],
     darkMode: 'class',
     preflight: {
-      'html': { '@apply': 'min-h-full' },
+      'html': { '@apply': 'h-full min-h-full' },
       'html[data-theme=dark]': theme.dark,
       'html[data-theme=light]': theme.light,
       'body': { '@apply': 'h-full' },
-      '#root': { '@apply': 'h-full' }
+      '#root': { '@apply': 'col h-full' },
+      'span': { '@apply': 'text-base' },
+      'p': { '@apply': 'text-base' },
+      'h1': { '@apply': 'text-6xl font-bold' },
+      'h2': { '@apply': 'text-5xl font-bold' },
+      'h3': { '@apply': 'text-4xl font-bold' },
+      'h4': { '@apply': 'text-3xl font-bold' },
+      'h5': { '@apply': 'text-2xl font-bold' },
+      'h6': { '@apply': 'text-xl font-bold' },
+      'ol': { '@apply': 'list-decimal' },
+      'ul': { '@apply': 'list-disc' },
+      'li': { '@apply': 'text-base' }
     },
     rules: [
       ['row', { '@apply': 'flex flex-row' }],
+      ['row-reverse', { '@apply': 'flex flex-row-reverse' }],
       ['col', { '@apply': 'flex flex-col' }],
+      ['col-reverse', { '@apply': 'flex flex-col-reverse' }],
       [
         '(start|end|center|baseline|stretch)-(normal|start|end|center|between|around|evenly|stretch)',
         match => ({ '@apply': `items-${match[1]} justify-${match[2]}` })
