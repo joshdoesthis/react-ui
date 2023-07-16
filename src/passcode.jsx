@@ -1,10 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Box } from './box'
-import { Text } from './text'
-import { toFirstUpper } from '../lib/util'
 
-export const Passcode = ({ label = '', ok, message, change = () => {} }) => {
+export const Passcode = ({ ok, style = '', change = () => {} }) => {
   const [passcode, setPasscode] = useState({
     0: '',
     1: '',
@@ -50,22 +48,19 @@ export const Passcode = ({ label = '', ok, message, change = () => {} }) => {
   }
 
   return (
-    <Box>
-      {label ? <Text>{toFirstUpper(label)}</Text> : null}
-      {message ? <Text>{message}</Text> : null}
-      <Box>
-        {[0, 1, 2, 3, 4, 5].map(i => (
-          <input
-            key={i}
-            id={`p${i}`}
-            type={'text'}
-            value={passcode[i]}
-            data-ok={ok}
-            onBlur={blur}
-            onChange={set(i)}
-          />
-        ))}
-      </Box>
+    <Box style='row gap-1'>
+      {[0, 1, 2, 3, 4, 5].map(i => (
+        <input
+          key={i}
+          id={`p${i}`}
+          type={'text'}
+          value={passcode[i]}
+          data-ok={ok}
+          className={style}
+          onBlur={blur}
+          onChange={set(i)}
+        />
+      ))}
     </Box>
   )
 }

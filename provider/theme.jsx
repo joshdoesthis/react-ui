@@ -14,7 +14,9 @@ const setup = () => {
     preflight: {
       'html': { '@apply': 'h-full min-h-full' },
       'body': { '@apply': 'h-full' },
-      '#root': { '@apply': 'col h-full' }
+      '#root': {
+        '@apply': 'col h-full bg-white text-black dark:(bg-black text-white)'
+      }
     },
     rules: [
       ['row', { '@apply': 'flex flex-row' }],

@@ -104,15 +104,13 @@ const App = () => {
 | Prop           | Type       | Description                                                                |
 | -------------- | ---------- | -------------------------------------------------------------------------- |
 | `id`           | `string`   | The id of the Input.                                                       |
-| `label`        | `string`   | The label of the Input.                                                    |
-| `name`         | `string`   | The name of the Input.                                                     |
 | `type`         | `string`   | The type of the Input. Defaults to `text`.                                 |
+| `name`         | `string`   | The name of the Input.                                                     |
 | `defaultValue` | `string`   | The default value of the Input.                                            |
 | `ok`           | `boolean`  | Whether or not the Input is ok. Defaults to `true`.                        |
-| `message`      | `string`   | The message of the Input.                                                  |
 | `style`        | `string`   | Any tailwind classes to apply to the Input.                                |
-| `change`       | `function` | A function to call when the Input's value changes.                         |
 | `blur`         | `function` | A function to call when the Input is blurred. References Input's `change`. |
+| `change`       | `function` | A function to call when the Input's value changes.                         |
 
 ## Markdown
 
@@ -122,18 +120,15 @@ const App = () => {
 
 ## Passcode
 
-| Prop      | Type       | Description                                            |
-| --------- | ---------- | ------------------------------------------------------ |
-| `label`   | `string`   | The label of the Passcode.                             |
-| `ok`      | `boolean`  | Whether or not the Passcode is ok. Defaults to `true`. |
-| `message` | `string`   | The message of the Passcode.                           |
-| `change`  | `function` | A function to call when the Passcode's value changes.  |
+| Prop     | Type       | Description                                            |
+| -------- | ---------- | ------------------------------------------------------ |
+| `ok`     | `boolean`  | Whether or not the Passcode is ok. Defaults to `true`. |
+| `change` | `function` | A function to call when the Passcode's value changes.  |
 
 ## Select
 
 | Prop              | Type       | Description                                                              |
 | ----------------- | ---------- | ------------------------------------------------------------------------ |
-| `label`           | `string`   | The label of the Select.                                                 |
 | `defaultValue`    | `string`   | The default value of the Select.                                         |
 | `options`         | `array`    | An array of options to display in the Select.                            |
 | `OptionComponent` | `function` | A component to render each option. Defaults to `DefaultOptionComponent`. |
@@ -170,7 +165,6 @@ const App = () => {
 
 | Prop     | Type       | Description                                       |
 | -------- | ---------- | ------------------------------------------------- |
-| `label`  | `string`   | The label of the DateTime.                        |
 | `change` | `function` | A function to call when DateTime's value changes. |
 
 ## DarkMode
