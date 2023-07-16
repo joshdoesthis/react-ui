@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { Box } from './box'
 import { Button } from './button'
+import { vi } from 'date-fns/locale'
 
 const DefaultTopComponent = ({ close }) => {
   return (
@@ -35,10 +36,10 @@ export const Drawer = ({
     return () => document.removeEventListener('click', click)
   }, [visibility])
 
-  return (
-    <Box forwardRef={ref} visible={visible} style={style}>
+  return visible ? (
+    <Box forwardRef={ref} style={style}>
       <TopComponent close={close} />
       {children}
     </Box>
-  )
+  ) : null
 }
