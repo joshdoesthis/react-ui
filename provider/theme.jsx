@@ -7,27 +7,14 @@ import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 import presetExt from '@twind/preset-ext'
 
-const setup = theme => {
+const setup = () => {
   const config = defineConfig({
     presets: [presetAutoprefix(), presetTailwind(), presetExt()],
-    darkMode: 'class',
+    darkMode: ['class', '[data-theme="dark"]'],
     preflight: {
       'html': { '@apply': 'h-full min-h-full' },
-      'html[data-theme=dark]': theme.dark,
-      'html[data-theme=light]': theme.light,
       'body': { '@apply': 'h-full' },
-      '#root': { '@apply': 'col h-full' },
-      'span': { '@apply': 'text-base' },
-      'p': { '@apply': 'text-base' },
-      'h1': { '@apply': 'text-6xl font-bold' },
-      'h2': { '@apply': 'text-5xl font-bold' },
-      'h3': { '@apply': 'text-4xl font-bold' },
-      'h4': { '@apply': 'text-3xl font-bold' },
-      'h5': { '@apply': 'text-2xl font-bold' },
-      'h6': { '@apply': 'text-xl font-bold' },
-      'ol': { '@apply': 'list-decimal' },
-      'ul': { '@apply': 'list-disc' },
-      'li': { '@apply': 'text-base' }
+      '#root': { '@apply': 'col h-full' }
     },
     rules: [
       ['row', { '@apply': 'flex flex-row' }],
@@ -49,21 +36,10 @@ const setup = theme => {
   install(config)
 }
 
-const defaultTheme = {
-  dark: {
-    backgroundColor: 'black',
-    color: 'white'
-  },
-  light: {
-    backgroundColor: 'white',
-    color: 'black'
-  }
-}
-
 const ThemeContext = createContext()
 export const useTheme = () => useContext(ThemeContext)
 
 export const Theme = ({ children, theme = {} }) => {
-  setup(mergeCommon(defaultTheme, theme))
+  setup() // TODO: theme
   return <ThemeContext.Provider value={{}}>{children}</ThemeContext.Provider>
 }

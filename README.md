@@ -51,11 +51,10 @@ const App = () => {
 
 ## Box
 
-| Prop         | Type      | Description                               |
-| ------------ | --------- | ----------------------------------------- |
-| `forwardRef` | `object`  | A ref to the underlying HTML element.     |
-| `style`      | `string`  | Any tailwind classes to apply to the Box. |
-| `visible`    | `boolean` | Whether or not the Box is visible.        |
+| Prop         | Type     | Description                               |
+| ------------ | -------- | ----------------------------------------- |
+| `forwardRef` | `object` | A ref to the underlying HTML element.     |
+| `style`      | `string` | Any tailwind classes to apply to the Box. |
 
 ## Button
 

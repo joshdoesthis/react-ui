@@ -1,13 +1,8 @@
 import React from 'react'
 
-export const Box = ({
-  children,
-  forwardRef = null,
-  style = '',
-  visible = true
-}) => {
+export const Box = ({ children, forwardRef = null, style = '' }) => {
   return (
-    <div ref={forwardRef} data-visible={visible} className={style}>
+    <div ref={forwardRef} className={style}>
       {children}
     </div>
   )
