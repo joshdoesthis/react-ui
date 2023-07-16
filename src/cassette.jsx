@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Box } from './box'
 import { Button } from './button'
+import { Divider } from './divider'
 import { toTitleCase } from '../lib/util'
 
 const DefaultOptionComponent = ({ name, value, active = false, select }) => {
@@ -31,12 +32,10 @@ export const Cassette = ({
     setSelected({ name, value })
   }
 
-  const Divider = () => <Box />
-
   return (
-    <Box>
+    <Box style='row'>
       {options.map((o, i) => (
-        <Box key={`o${i}`}>
+        <Box key={`o${i}`} style='row'>
           <OptionComponent
             name={o.name}
             value={o.value}

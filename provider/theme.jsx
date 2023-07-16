@@ -12,11 +12,28 @@ const setup = () => {
     presets: [presetAutoprefix(), presetTailwind(), presetExt()],
     darkMode: ['class', '[data-theme="dark"]'],
     preflight: {
-      'html': { '@apply': 'h-full min-h-full' },
+      'html': { '@apply': 'h-full' },
       'body': { '@apply': 'h-full' },
       '#root': {
-        '@apply': 'col h-full bg-white text-black dark:(bg-black text-white)'
-      }
+        '@apply': 'col min-h-full bg-(white dark:black) text-(black dark:white)'
+      },
+      'span': { '@apply': 'text-base' },
+      'p': { '@apply': 'text-base leading-relaxed my-4' },
+      'h1': { '@apply': 'text-6xl font-bold leading-tight my-4' },
+      'h2': { '@apply': 'text-5xl font-bold leading-tight my-4' },
+      'h3': { '@apply': 'text-4xl font-bold leading-tight my-4' },
+      'h4': { '@apply': 'text-3xl font-bold leading-tight my-4' },
+      'h5': { '@apply': 'text-2xl font-bold leading-tight my-4' },
+      'h6': { '@apply': 'text-xl font-bold leading-tight my-4' },
+      'ol': { '@apply': 'list-decimal pl-8' },
+      'ul': { '@apply': 'list-disc pl-8' },
+      'li': { '@apply': 'list-item leading-relaxed' },
+      'code': {
+        '@apply':
+          'text-sm font-mono bg-(zinc-300 dark:zinc-700) px-1 py-0.5 rounded'
+      },
+      'pre code': { '@apply': 'inline-flex px-2 py-1' },
+      'hr': { '@apply': 'border-(b t-0 zinc-300 dark:zinc-700)' }
     },
     rules: [
       ['row', { '@apply': 'flex flex-row' }],

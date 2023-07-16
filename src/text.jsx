@@ -14,7 +14,9 @@ export const Text = ({
   h6,
   ol,
   ul,
-  li
+  li,
+  code,
+  ...props
 }) => {
   const tag = Object.entries({
     span,
@@ -27,8 +29,10 @@ export const Text = ({
     h6,
     ol,
     ul,
-    li
+    li,
+    code,
+    ...props
   }).find(([k, v]) => v)
 
-  return createElement(tag ? tag[0] : 'span', { className: style }, children)
+  return createElement(tag ? tag[0] : 'span', {}, children)
 }
