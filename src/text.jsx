@@ -34,5 +34,9 @@ export const Text = ({
     ...props
   }).find(([k, v]) => v)
 
-  return createElement(tag ? tag[0] : 'span', {}, children)
+  return createElement(
+    tag ? tag[0] : 'span',
+    { ...(style ? { className: style } : null) },
+    children
+  )
 }
