@@ -12,7 +12,7 @@ export const Button = ({
     <button
       ref={forwardRef}
       disabled={disabled}
-      data-active={active}
+      active={`${active}`}
       onClick={press}
       className={style}
     >

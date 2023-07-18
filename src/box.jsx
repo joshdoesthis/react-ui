@@ -1,8 +1,13 @@
 import React from 'react'
 
-export const Box = ({ children, forwardRef = null, style = '' }) => {
+export const Box = ({
+  children,
+  forwardRef = null,
+  active = false,
+  style = ''
+}) => {
   return (
-    <div ref={forwardRef} className={style}>
+    <div ref={forwardRef} active={`${active}`} className={style}>
       {children}
     </div>
   )

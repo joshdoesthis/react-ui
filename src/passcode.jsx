@@ -55,7 +55,7 @@ export const Passcode = ({ ok, style = '', change = () => {} }) => {
           id={`p${i}`}
           type={'text'}
           value={passcode[i]}
-          data-ok={ok}
+          ok={`${ok}`}
           className={style}
           onBlur={blur}
           onChange={set(i)}

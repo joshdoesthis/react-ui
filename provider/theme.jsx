@@ -1,15 +1,20 @@
 import React from 'react'
 import { createContext, useContext } from 'react'
-import { mergeCommon } from '../lib/util'
 import install from '@twind/with-react'
 import { defineConfig } from '@twind/core'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 import presetExt from '@twind/preset-ext'
+import presetLineClamp from '@twind/preset-line-clamp'
 
 const setup = () => {
   const config = defineConfig({
-    presets: [presetAutoprefix(), presetTailwind(), presetExt()],
+    presets: [
+      presetAutoprefix(),
+      presetTailwind(),
+      presetExt(),
+      presetLineClamp()
+    ],
     darkMode: ['class', '[data-theme="dark"]'],
     preflight: {
       'html': { '@apply': 'h-full' },

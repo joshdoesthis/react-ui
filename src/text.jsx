@@ -34,6 +34,14 @@ export const Text = ({
     ...props
   }).find(([k, v]) => v)
 
+  if (tag && tag[0] === 'href') {
+    return createElement(
+      'a',
+      { href: tag[1], className: 'underline' },
+      children
+    )
+  }
+
   return createElement(
     tag ? tag[0] : 'span',
     { ...(style ? { className: style } : null) },

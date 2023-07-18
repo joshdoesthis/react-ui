@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { Box } from './box'
 import { Button } from './button'
-import { vi } from 'date-fns/locale'
 
 const DefaultTopComponent = ({ close }) => {
   return (

@@ -1,14 +1,13 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import { Box } from './box'
 import { Button } from './button'
-import { Divider } from './divider'
-import { toTitleCase } from '../lib/util'
+import { mergeStyles } from '../lib/util'
 
 const DefaultOptionComponent = ({ name, value, active = false, select }) => {
   return (
     <Button active={active} press={() => select({ name, value })}>
-      {toTitleCase(name)}
+      {name}
     </Button>
   )
 }
@@ -16,8 +15,9 @@ const DefaultOptionComponent = ({ name, value, active = false, select }) => {
 export const Cassette = ({
   defaultValue,
   options,
-  change = () => {},
-  OptionComponent = DefaultOptionComponent
+  style = '',
+  OptionComponent = DefaultOptionComponent,
+  change = () => {}
 }) => {
   const [selected, setSelected] = useState(
     options.find(o => o.value === defaultValue)
@@ -32,18 +32,20 @@ export const Cassette = ({
     setSelected({ name, value })
   }
 
+  const defaultStyle =
+    'row gap-px bg-(white dark:black) overflow-hidden rounded'
+
   return (
-    <Box style='row'>
+    <Box style={mergeStyles(defaultStyle, style)}>
       {options.map((o, i) => (
-        <Box key={`o${i}`} style='row'>
+        <Fragment key={`o${i}`}>
           <OptionComponent
             name={o.name}
             value={o.value}
             active={selected ? selected.value === o.value : false}
             select={select}
           />
-          {i < options.length - 1 ? <Divider /> : null}
-        </Box>
+        </Fragment>
       ))}
     </Box>
   )

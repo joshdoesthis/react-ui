@@ -64,7 +64,7 @@ export const Input = ({
         id={id}
         contentEditable
         suppressContentEditableWarning
-        data-ok={ok}
+        ok={`${ok}`}
         className={style}
         onBlur={blur}
         onInput={set(type)}
@@ -78,7 +78,7 @@ export const Input = ({
       type={type}
       name={name}
       value={value}
-      data-ok={ok}
+      ok={`${ok}`}
       className={style}
       onBlur={blur}
       onChange={set(type)}
