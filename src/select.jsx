@@ -46,6 +46,11 @@ export const Select = ({
     setActive(false)
   }
 
+  useEffect(() => {
+    console.log('mount')
+    return () => console.log('unmount')
+  }, [])
+
   return (
     <Box forwardRef={ref} style='relative col stretch-center rounded w-full'>
       <Button
