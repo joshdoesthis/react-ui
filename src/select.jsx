@@ -47,8 +47,8 @@ export const Select = ({
   }
 
   useEffect(() => {
-    console.log('mount')
-    return () => console.log('unmount')
+    console.log('select mount')
+    return () => console.log('select unmount')
   }, [])
 
   return (
