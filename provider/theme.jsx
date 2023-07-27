@@ -38,7 +38,11 @@ const setup = () => {
           'text-sm font-mono bg-(zinc-300 dark:zinc-700) px-1 py-0.5 rounded'
       },
       'pre code': { '@apply': 'inline-flex px-2 py-1' },
-      'hr': { '@apply': 'border-(b t-0 zinc-300 dark:zinc-700)' }
+      'hr': { '@apply': 'border-(b t-0 zinc-300 dark:zinc-700)' },
+      'blockquote': {
+        '@apply':
+          'border-l-4 border-(zinc-300 dark:zinc-700) pl-4 text-base leading-relaxed my-4'
+      }
     },
     rules: [
       ['row', { '@apply': 'flex flex-row' }],
