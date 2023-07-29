@@ -14,7 +14,7 @@ export const Text = ({
   ins,
   sub,
   sup,
-  span = true,
+  span,
   q,
   blockquote,
   abbr,
@@ -64,7 +64,7 @@ export const Text = ({
     p,
     br,
     pre
-  }).find(([k, v]) => v)
+  }).find(([_, v]) => v)
 
   if (tag && tag[0] === 'href') {
     return createElement(
