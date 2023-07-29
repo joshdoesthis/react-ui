@@ -145,21 +145,11 @@ const App = () => {
 
 ## Text
 
-| Prop       | Type      | Description                                            |
-| ---------- | --------- | ------------------------------------------------------ |
-| `children` | `string`  | The text to render.                                    |
-| `style`    | `string`  | Any tailwind classes to apply to the text.             |
-| `span`     | `boolean` | Whether or not the text is a span. Defaults to `true`. |
-| `p`        | `boolean` | Whether or not the text is a p. Defaults to `false`.   |
-| `h1`       | `boolean` | Whether or not the text is an h1. Defaults to `false`. |
-| `h2`       | `boolean` | Whether or not the text is an h2. Defaults to `false`. |
-| `h3`       | `boolean` | Whether or not the text is an h3. Defaults to `false`. |
-| `h4`       | `boolean` | Whether or not the text is an h4. Defaults to `false`. |
-| `h5`       | `boolean` | Whether or not the text is an h5. Defaults to `false`. |
-| `h6`       | `boolean` | Whether or not the text is an h6. Defaults to `false`. |
-| `ol`       | `boolean` | Whether or not the text is ol. Defaults to `false`.    |
-| `ul`       | `boolean` | Whether or not the text is ul. Defaults to `false`.    |
-| `li`       | `boolean` | Whether or not the text is li. Defaults to `false`.    |
+| Prop                                                                                                                                               | Type      | Description                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
+| `children`                                                                                                                                         | `string`  | The text to render.                                                                      |
+| `style`                                                                                                                                            | `string`  | Any tailwind classes to apply to the text.                                               |
+| `b, strong, i, em, mark, small, del, ins, sub, sup, span, q, blockquote, abbr, address, cite, bdo, ul, ol, li, h1, h2, h3, h4, h5, h6, p, br, pre` | `boolean` | Whether or not to render the text as the corresponding HTML element. Defaults to `span`. |
 
 ## DateTime
 
