@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Box } from './box'
 import { Input } from './input'
 import { Text } from './text'
-import { toFirstUpper } from '../lib/util'
+import { toFirstUpper } from '../lib/utils'
 import { getDaysInMonth } from 'date-fns'
 
 export const DateTime = ({ label = '', change = () => {} }) => {

@@ -14,6 +14,7 @@ export const Text = ({
   ins,
   sub,
   sup,
+  a,
   span,
   q,
   blockquote,
@@ -32,7 +33,16 @@ export const Text = ({
   h6,
   p,
   br,
-  pre
+  pre,
+  code,
+  table,
+  thead,
+  tbody,
+  tfoot,
+  tr,
+  th,
+  td,
+  ...props
 }) => {
   const tag = Object.entries({
     b,
@@ -45,6 +55,7 @@ export const Text = ({
     ins,
     sub,
     sup,
+    a,
     span,
     q,
     blockquote,
@@ -63,20 +74,26 @@ export const Text = ({
     h6,
     p,
     br,
-    pre
+    pre,
+    code,
+    table,
+    thead,
+    tbody,
+    tfoot,
+    tr,
+    th,
+    td
   }).find(([_, v]) => v)
 
-  if (tag && tag[0] === 'href') {
-    return createElement(
-      'a',
-      { href: tag[1], className: 'underline' },
-      children
-    )
-  }
+  const classes = [props.className, style].join(' ').trim()
+  const href = props.href
 
   return createElement(
-    tag ? tag[0] : 'span',
-    { ...(style ? { className: style } : null) },
+    tag?.[0] ?? 'span',
+    {
+      ...(classes ? { className: classes } : null),
+      ...(href ? { href } : null)
+    },
     children
   )
 }

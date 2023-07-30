@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Button } from './button'
 import { Text } from './text'
-import { toFirstUpper } from '../lib/util'
+import { toFirstUpper } from '../lib/utils'
 import { useTheme } from '../provider/theme'
 
 const DefaultSwitchComponent = ({ mode, cycle }) => {

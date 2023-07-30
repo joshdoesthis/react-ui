@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect, Fragment } from 'react'
 import { Box } from './box'
 import { Button } from './button'
-import { mergeStyles } from '../lib/util'
+import { mergeStyles } from '../lib/utils'
 
 const DefaultOptionComponent = ({ name, value, active = false, select }) => {
   return (
