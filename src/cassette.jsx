@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { Box } from './box'
 import { Button } from './button'
 import { mergeStyles } from '../lib/utils'

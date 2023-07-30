@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box } from './box'
 
 export const Passcode = ({ ok, style = '', change = () => {} }) => {

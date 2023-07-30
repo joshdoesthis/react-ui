@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from './button'
 import { Text } from './text'
 import { toFirstUpper } from '../lib/utils'
