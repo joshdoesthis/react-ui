@@ -61,6 +61,7 @@ const App = () => {
 | Prop         | Type       | Description                                                 |
 | ------------ | ---------- | ----------------------------------------------------------- |
 | `forwardRef` | `object`   | A ref to the underlying HTML element.                       |
+| `name`       | `string`   | The name of the button for accessibility purposes.          |
 | `active`     | `boolean`  | Whether or not the Button is active. Defaults to `false`.   |
 | `disabled`   | `boolean`  | Whether or not the Button is disabled. Defaults to `false`. |
 | `style`      | `string`   | Any tailwind classes to apply to the Button.                |
