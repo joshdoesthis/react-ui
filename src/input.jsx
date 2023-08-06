@@ -7,6 +7,7 @@ export const Input = ({
   defaultValue = '',
   ok = true,
   style = '',
+  hidden = false,
   blur = () => {},
   change = () => {}
 }) => {
@@ -38,9 +39,13 @@ export const Input = ({
   const set = type => e => {
     if (type === 'multiline') {
       setValue(e.target.innerText.replace(/\u00a0/g, ' '))
-    } else {
-      setValue(e.target.value)
+      return
     }
+    if (type === 'file') {
+      setValue(e.target.files)
+      return
+    }
+    setValue(e.target.value)
   }
 
   const validate = (type, value) => {
@@ -54,6 +59,11 @@ export const Input = ({
         ? { ok: true, message: '' }
         : { ok: false, message: 'Invalid email address' }
     }
+    if (type === 'file') {
+      return value.length > 0
+        ? { ok: true, message: '' }
+        : { ok: false, message: 'Required' }
+    }
   }
 
   if (type === 'multiline') {
@@ -64,9 +74,25 @@ export const Input = ({
         contentEditable
         suppressContentEditableWarning
         ok={`${ok}`}
+        hidden={hidden}
         className={style}
         onBlur={blur}
         onInput={set(type)}
+      />
+    )
+  }
+
+  if (type === 'file') {
+    return (
+      <input
+        id={id}
+        type={type}
+        name={name}
+        ok={`${ok}`}
+        hidden={hidden}
+        className={style}
+        onBlur={blur}
+        onChange={set(type)}
       />
     )
   }
@@ -78,6 +104,7 @@ export const Input = ({
       name={name}
       value={value}
       ok={`${ok}`}
+      hidden={hidden}
       className={style}
       onBlur={blur}
       onChange={set(type)}
