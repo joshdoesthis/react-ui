@@ -7,6 +7,7 @@ export const Input = ({
   defaultValue = '',
   ok = true,
   style = '',
+  multiple = false,
   hidden = false,
   blur = () => {},
   change = () => {}
@@ -89,6 +90,7 @@ export const Input = ({
         type={type}
         name={name}
         ok={`${ok}`}
+        multiple={multiple}
         hidden={hidden}
         className={style}
         onBlur={blur}
