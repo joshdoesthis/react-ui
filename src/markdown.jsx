@@ -19,7 +19,7 @@ export const Markdown = ({ children }) => {
     a: 'text-(blue-500 dark:blue-400) hover:underline',
     span: 'inline-block',
     q: 'italic',
-    blockquote: 'italic border-(l-4 zinc-300 dark:zinc-700) pl-4 my-4',
+    blockquote: 'italic border-(l-1 black dark:white) pl-4 my-4',
     abbrev: 'italic',
     address: 'italic',
     cite: 'italic',
@@ -36,7 +36,7 @@ export const Markdown = ({ children }) => {
     p: 'my-4',
     br: 'block',
     pre: 'my-4',
-    code: '[pre_&]:(block px-1 py-0.5 rounded) text-sm font-mono bg-(green-200 opacity-50 dark:(green-800 opacity-50)) text-(green-800 dark:green-200)',
+    code: '[pre_&]:(block px-1 py-0.5) text-sm font-mono bg-(green-200 opacity-50 dark:(green-800 opacity-50)) text-(green-800 dark:green-200)',
     hr: 'border-(0 b zinc-300 dark:zinc-700) my-4',
     table: 'table-auto',
     thead: 'bg-(zinc-300 dark:zinc-700)',
@@ -49,8 +49,9 @@ export const Markdown = ({ children }) => {
 
   return (
     <MDX
-      className='font-serif text-base'
+      className='text-(zinc-700 dark:zinc-300))'
       options={{
+        forceWrapper: true,
         createElement: (type, props, children) => {
           if (type === 'img') return <img {...props} className={style.img} />
           if (type === 'video')
