@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Box } from './box'
 import { Button } from './button'
 import { Text } from './text'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 const DefaultOptionComponent = ({ name, value, active = false, select }) => {
   return (
@@ -36,9 +34,7 @@ export const Menu = ({ children, change = () => {} }) => {
         press={toggle}
       >
         <Text style='text-xs text-left font-bold line-clamp-1'>Menu</Text>
-        <Text style='text-xs'>
-          <FontAwesomeIcon icon={active ? faChevronUp : faChevronDown} />
-        </Text>
+        <Text style='text-xs'>{active ? '△' : '▽'}</Text>
       </Button>
       <Box
         active={active}

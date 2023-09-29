@@ -53,7 +53,12 @@ export const Markdown = ({ children }) => {
       options={{
         forceWrapper: true,
         createElement: (type, props, children) => {
-          if (type === 'img') return <img {...props} className={style.img} />
+          if (type === 'img') {
+            const url = new URL(props.src)
+            props.width = url.searchParams.get('width') ?? '100%'
+            props.height = url.searchParams.get('height') ?? 'auto'
+            return <img {...props} className={style.img} />
+          }
           if (type === 'video')
             return <video {...props} className={style.video} />
           if (type === 'audio')
